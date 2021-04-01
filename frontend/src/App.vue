@@ -1,11 +1,7 @@
 <template>
   <div id="app">
     <v-app>
-      <main>
-        <v-container pa-0 ma-0>
-          <router-view></router-view>
-        </v-container>
-      </main>
+      <router-view></router-view>
     </v-app>
   </div>
 </template>
@@ -18,13 +14,14 @@ export default {
 
 <style>
 
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;500;600;800&display=swap');
 
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: #2c3e50;
-  font-family: 'Montserrat', sans-serif;
+  font-family: 'Raleway', sans-serif;
 }
+
 </style>
