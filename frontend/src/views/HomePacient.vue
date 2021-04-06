@@ -9,7 +9,7 @@
         class="bradius ma-0 pa-0">
         <v-row class="ma-0">
           <v-col cols="6" class="pa-5">
-            <p class="text-h5 font-weight-bold mt-16 mx-16">Welcome Jane Smith !</p>
+            <p class="text-h5 font-weight-bold mt-16 mx-16">Welcome {{ user.name }} !</p>
             <p class="text-subtitle1 font-weight-regular mx-16">Let's check your test results</p>
             <v-card width="30vh" class="mx-16 mt-16 pa-5 rounded-xl" align="center" elevation="2">
               <v-card-text class="font-weight-bold text-h6">Clinical Trial Phase {{ user.clinicalTrialPhase }}</v-card-text>

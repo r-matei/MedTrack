@@ -32,8 +32,12 @@
 
         <template v-slot:append>
           <div class="pa-2">
-            <v-btn block text class="my-4">
-              <v-icon medium class="mr-2">mdi-logout-variant</v-icon>Logout
+            <v-btn
+              block
+              text
+              class="my-4"
+              @click = "logout({name: 'register'})">
+              <v-icon medium class="mr-2 mb-1">mdi-logout-variant</v-icon>Logout
             </v-btn>
           </div>
         </template>
@@ -66,6 +70,15 @@ export default {
         { title: 'Medication', icon: 'mdi-heart-outline', link: '/user/medication' }
       ]
     }
+  },
+  methods: {
+    logout () {
+      this.$store.dispatch('setToken', null)
+      this.$store.dispatch('setUser', null)
+      this.$router.push({
+        name: 'register'
+      })
+    }
   }
 }
 </script>
@@ -85,5 +98,9 @@ export default {
 
 .left-margin-menu {
   padding-left: 7vh;
+}
+
+.white-link {
+  color: white;
 }
 </style>

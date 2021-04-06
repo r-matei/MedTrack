@@ -19,13 +19,26 @@
                   <v-tab-item>
                       <v-card>
                           <v-card-text>
-                              <v-form ref="loginForm" v-model="valid" lazy-validation>
+                              <form ref="loginForm">
                                   <v-row>
                                       <v-col cols="12" class="px-0 pt-15 pb-0 ma-0">
-                                          <v-text-field color="#76C6D1" v-model="loginEmail" name="loginEmail" label="E-mail" required outlined></v-text-field>
+                                          <v-text-field
+                                            color="#76C6D1"
+                                            v-model="loginEmail"
+                                            name="loginEmail"
+                                            label="E-mail"
+                                            required
+                                            outlined></v-text-field>
                                       </v-col>
                                       <v-col cols="12" class="px-0 py-0 ma-0">
-                                          <v-text-field color="#76C6D1" v-model="loginPassword" :type="password" name="loginPassword" label="Password" hint="At least 8 characters" outlined></v-text-field>
+                                          <v-text-field
+                                            color="#76C6D1"
+                                            v-model="loginPassword"
+                                            type="password"
+                                            name="loginPassword"
+                                            label="Password"
+                                            hint="At least 8 characters"
+                                            outlined></v-text-field>
                                       </v-col>
                                       <v-col cols="12" class="px-0 py-0 ma-0">
                                         <v-btn
@@ -45,29 +58,62 @@
                                             @click="login"> Login </v-btn>
                                       </v-col>
                                   </v-row>
-                              </v-form>
+                              </form>
                           </v-card-text>
                       </v-card>
                   </v-tab-item>
                   <v-tab-item>
                       <v-card>
                           <v-card-text>
-                              <v-form ref="registerForm" v-model="valid" lazy-validation>
+                              <form ref="registerForm">
                                   <v-row>
                                       <v-col cols="12" sm="6" md="6" class="pt-15 pb-0 pl-0">
-                                          <v-text-field color="#76C6D1" outlined v-model="firstName" label="First Name" maxlength="20" required></v-text-field>
+                                          <v-text-field
+                                            color="#76C6D1"
+                                            outlined
+                                            v-model="firstName"
+                                            label="First Name"
+                                            maxlength="20"
+                                            required></v-text-field>
                                       </v-col>
                                       <v-col cols="12" sm="6" md="6" class="pt-15 pb-0 pr-0">
-                                          <v-text-field color="#76C6D1" outlined v-model="lastName" label="Last Name" maxlength="20" required></v-text-field>
+                                          <v-text-field
+                                            color="#76C6D1"
+                                            outlined
+                                            v-model="lastName"
+                                            label="Last Name"
+                                            maxlength="20"
+                                            required></v-text-field>
                                       </v-col>
                                       <v-col cols="12" class="px-0 py-0">
-                                          <v-text-field color="#76C6D1" outlined v-model="email" label="E-mail" required></v-text-field>
+                                          <v-text-field
+                                            color="#76C6D1"
+                                            outlined
+                                            v-model="email"
+                                            label="E-mail"
+                                            autocomplete="new-password"
+                                            required></v-text-field>
                                       </v-col>
                                       <v-col cols="12" sm="6" md="6" class="pl-0 py-0">
-                                          <v-text-field color="#76C6D1" outlined block v-model="registerPassword" :type="password" name="password" label="Password"></v-text-field>
+                                          <v-text-field
+                                            color="#76C6D1"
+                                            outlined
+                                            block
+                                            v-model="registerPassword"
+                                            type="password"
+                                            name="password"
+                                            autocomplete="new-password"
+                                            label="Password"></v-text-field>
                                       </v-col>
                                       <v-col cols="12" sm="6" md="6" class="pr-0 py-0">
-                                          <v-text-field color="#76C6D1" outlined block v-model="verify" :type="password" name="verify-password" label="Confirm Password"></v-text-field>
+                                          <v-text-field
+                                            color="#76C6D1"
+                                            outlined
+                                            block
+                                            v-model="verify"
+                                            type="password"
+                                            name="verify-password"
+                                            label="Confirm Password"></v-text-field>
                                       </v-col>
                                       <v-col class="px-0 pt-0" cols="12">
                                           <div class="text-error" v-html="error"/>
@@ -80,7 +126,7 @@
                                             @click="register"> Register </v-btn>
                                       </v-col>
                                   </v-row>
-                              </v-form>
+                              </form>
                           </v-card-text>
                       </v-card>
                   </v-tab-item>
@@ -129,22 +175,29 @@ export default {
   methods: {
     async register () {
       try {
-        await AuthenticationService.register({
+        const response = await AuthenticationService.register({
           firstName: this.firstName,
           lastName: this.lastName,
           email: this.email,
           password: this.registerPassword
         })
+        this.$store.dispatch('setToken', response.data.token)
+        this.$store.dispatch('setUser', response.data.user)
       } catch (error) {
         this.error = error.response.data.error
       }
     },
     async login () {
-      const response = await AuthenticationService.login({
-        email: this.loginEmail,
-        password: this.loginPassword
-      })
-      console.log(response.data)
+      try {
+        const response = await AuthenticationService.login({
+          email: this.loginEmail,
+          password: this.loginPassword
+        })
+        this.$store.dispatch('setToken', response.data.token)
+        this.$store.dispatch('setUser', response.data.user)
+      } catch (error) {
+        this.error = error.response.data.error
+      }
     }
   }
 
