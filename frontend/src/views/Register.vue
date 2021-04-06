@@ -22,10 +22,10 @@
                               <v-form ref="loginForm" v-model="valid" lazy-validation>
                                   <v-row>
                                       <v-col cols="12" class="px-0 pt-15 pb-0 ma-0">
-                                          <v-text-field color="#76C6D1" v-model="loginEmail" label="E-mail" required outlined></v-text-field>
+                                          <v-text-field color="#76C6D1" v-model="loginEmail" name="loginEmail" label="E-mail" required outlined></v-text-field>
                                       </v-col>
                                       <v-col cols="12" class="px-0 py-0 ma-0">
-                                          <v-text-field color="#76C6D1" v-model="loginPassword" :type="password" name="password" label="Password" hint="At least 8 characters" outlined></v-text-field>
+                                          <v-text-field color="#76C6D1" v-model="loginPassword" :type="password" name="loginPassword" label="Password" hint="At least 8 characters" outlined></v-text-field>
                                       </v-col>
                                       <v-col cols="12" class="px-0 py-0 ma-0">
                                         <v-btn
@@ -42,7 +42,7 @@
                                             color="#76C6D1"
                                             class="mt-5 white-text"
                                             :disabled="!valid"
-                                            @click="validate"> Login </v-btn>
+                                            @click="login"> Login </v-btn>
                                       </v-col>
                                   </v-row>
                               </v-form>
@@ -64,18 +64,20 @@
                                           <v-text-field color="#76C6D1" outlined v-model="email" label="E-mail" required></v-text-field>
                                       </v-col>
                                       <v-col cols="12" sm="6" md="6" class="pl-0 py-0">
-                                          <v-text-field color="#76C6D1" outlined block v-model="password" :type="password" name="password" label="Password"></v-text-field>
+                                          <v-text-field color="#76C6D1" outlined block v-model="registerPassword" :type="password" name="password" label="Password"></v-text-field>
                                       </v-col>
                                       <v-col cols="12" sm="6" md="6" class="pr-0 py-0">
                                           <v-text-field color="#76C6D1" outlined block v-model="verify" :type="password" name="verify-password" label="Confirm Password"></v-text-field>
                                       </v-col>
                                       <v-col class="px-0 pt-0" cols="12">
+                                          <div class="text-error" v-html="error"/>
+                                          <br>
                                           <v-btn x-large block
                                             type="submit"
                                             color="#76C6D1"
                                             class="mt-5 white-text"
                                             :disabled="!valid"
-                                            @click="validate"> Register </v-btn>
+                                            @click="register"> Register </v-btn>
                                       </v-col>
                                   </v-row>
                               </v-form>
@@ -90,7 +92,7 @@
 </template>
 
 <script>
-
+import AuthenticationService from '@/services/AuthenticationService'
 export default {
   data () {
     return {
@@ -112,10 +114,11 @@ export default {
       firstName: '',
       lastName: '',
       email: '',
-      password: '',
+      registerPassword: '',
       verify: '',
       loginPassword: '',
-      loginEmail: ''
+      loginEmail: '',
+      error: null
     }
   },
   computed: {
@@ -124,18 +127,27 @@ export default {
     }
   },
   methods: {
-    validate () {
-      if (this.$refs.loginForm.validate()) {
-        // submit form to server/API here...
+    async register () {
+      try {
+        await AuthenticationService.register({
+          firstName: this.firstName,
+          lastName: this.lastName,
+          email: this.email,
+          password: this.registerPassword
+        })
+      } catch (error) {
+        this.error = error.response.data.error
       }
     },
-    reset () {
-      this.$refs.form.reset()
-    },
-    resetValidation () {
-      this.$refs.form.resetValidation()
+    async login () {
+      const response = await AuthenticationService.login({
+        email: this.loginEmail,
+        password: this.loginPassword
+      })
+      console.log(response.data)
     }
   }
+
 }
 
 </script>
@@ -174,6 +186,10 @@ export default {
 
 .theme--dark.v-tabs>.v-tabs-bar .v-tab--disabled, .theme--dark.v-tabs>.v-tabs-bar .v-tab:not(.v-tab--active), .theme--dark.v-tabs>.v-tabs-bar .v-tab:not(.v-tab--active)>.v-btn, .theme--dark.v-tabs>.v-tabs-bar .v-tab:not(.v-tab--active)>.v-icon {
     color: #76C6D1;
+}
+
+.text-error {
+  color: red;
 }
 
 </style>

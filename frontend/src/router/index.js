@@ -4,7 +4,7 @@ import HomePacient from '../views/HomePacient.vue'
 import User from '../views/User.vue'
 import AppointmentsPacient from '../views/AppoinmentsPacient.vue'
 import MedicationPacient from '../views/MedicationPacient.vue'
-import Login from '../views/Login.vue'
+import Register from '../views/Register.vue'
 import Questionnaire from '../views/Questionnaire.vue'
 import ClinicalTrials from '../views/ClinicalTrials.vue'
 import Survey from '../views/Survey.vue'
@@ -36,9 +36,9 @@ export default new Router({
       ]
     },
     {
-      path: '/login',
-      name: 'login',
-      component: Login
+      path: '/register',
+      name: 'register',
+      component: Register
     },
     {
       path: '/questionnaire',
