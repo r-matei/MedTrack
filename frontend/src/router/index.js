@@ -1,9 +1,9 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import HomePacient from '../views/HomePacient.vue'
-import User from '../views/User.vue'
-import AppointmentsPacient from '../views/AppoinmentsPacient.vue'
-import MedicationPacient from '../views/MedicationPacient.vue'
+import HomePatient from '../views/HomePatient.vue'
+import Patient from '../views/Patient.vue'
+import AppointmentsPatient from '../views/AppoinmentsPatient.vue'
+import MedicationPatient from '../views/MedicationPatient.vue'
 import Register from '../views/Register.vue'
 import Questionnaire from '../views/Questionnaire.vue'
 import ClinicalTrials from '../views/ClinicalTrials.vue'
@@ -14,24 +14,24 @@ Vue.use(Router)
 export default new Router({
   routes: [
     {
-      path: '/user',
-      name: 'User',
-      component: User,
+      path: '/patient',
+      name: 'Patient',
+      component: Patient,
       children: [
         {
           path: 'home',
           name: 'Home',
-          component: HomePacient
+          component: HomePatient
         },
         {
           path: 'appointments',
           name: 'Appointments',
-          component: AppointmentsPacient
+          component: AppointmentsPatient
         },
         {
           path: 'medication',
           name: 'Medication',
-          component: MedicationPacient
+          component: MedicationPatient
         }
       ]
     },

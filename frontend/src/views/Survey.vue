@@ -1,7 +1,7 @@
 <template>
-  <v-row justify="center" align="center" class="ma-0">
+  <v-row justify="center" align="center" fill-height class="ma-0">
     <v-col cols="4" class="pa-0">
-      <v-card color="#76C6D1" height="101vh" dark>
+      <v-card color="#76C6D1" height="101vh" dark class="ma-0 pa-0">
         <v-row class="fill-height" justify="center" align="center">
           <v-card-title class="text-h4 font-weight-medium">
             Survey

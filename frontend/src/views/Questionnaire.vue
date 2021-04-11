@@ -51,7 +51,7 @@
                     :label="i.text"
                   ></v-checkbox>
               </div>
-              <v-row class="bottom-page" o-gutters>
+              <v-row class="bottom-page" no-gutters>
                 <v-col cols="2" align-start>
                   <v-btn class="mx-10"
                     color="#76C6D1" dark block
@@ -79,7 +79,7 @@
                     :label="i.text"
                   ></v-checkbox>
               </div>
-              <v-row class="bottom-page" o-gutters>
+              <v-row class="bottom-page" no-gutters>
                 <v-col cols="2" align-start>
                   <v-btn class="mx-10"
                     color="#76C6D1" dark block
@@ -180,6 +180,10 @@ export default {
 
 .bottom-page {
   margin-top: 45vh;
+}
+
+.fixed {
+  position: fixed;
 }
 
 </style>

@@ -7,28 +7,28 @@ export default new Vuex.Store({
   strict: true,
   state: {
     token: null,
-    user: null,
-    isUserLoggedIn: false
+    patient: null,
+    isPacientLoggedIn: false
   },
   mutations: {
     setToken (state, token) {
       state.token = token
       if (token) {
-        state.isUserLoggedIn = true
+        state.isPatientLoggedIn = true
       } else {
-        state.isUserLoggedIn = false
+        state.isPatientLoggedIn = false
       }
     },
-    setUser (state, user) {
-      state.user = user
+    setPatient (state, patient) {
+      state.patient = patient
     }
   },
   actions: {
     setToken ({commit}, token) {
       commit('setToken', token)
     },
-    setUser ({commit}, user) {
-      commit('setUser', user)
+    setPatient ({commit}, patient) {
+      commit('setPatient', patient)
     }
   }
 })

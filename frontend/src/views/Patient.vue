@@ -65,9 +65,9 @@ export default {
         alt: 'Logo'
       },
       menu: [
-        { title: 'Home', icon: 'mdi-home-outline', link: '/user/home' },
-        { title: 'Appointments', icon: 'mdi-calendar', link: '/user/appointments' },
-        { title: 'Medication', icon: 'mdi-heart-outline', link: '/user/medication' }
+        { title: 'Home', icon: 'mdi-home-outline', link: '/patient/home' },
+        { title: 'Appointments', icon: 'mdi-calendar', link: '/patient/appointments' },
+        { title: 'Medication', icon: 'mdi-heart-outline', link: '/patient/medication' }
       ]
     }
   },

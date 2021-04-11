@@ -1,10 +1,10 @@
-const {User} = require('../models')
+const {Patient} = require('../models')
 const jwt = require('jsonwebtoken')
 const config = require('../config/config')
 
-function jwtSignUser (user) {
+function jwtSignPatient (patient) {
   const ONE_WEEK = 60 * 60 * 24 * 7
-   return jwt.sign(user, config.authentication.jwtSecret, {
+   return jwt.sign(patient, config.authentication.jwtSecret, {
      expiresIn: ONE_WEEK
    })
 }
@@ -12,11 +12,11 @@ function jwtSignUser (user) {
 module.exports = {
   async register (req, res) {
     try {
-      const user = await User.create(req.body)
-      const userJson = user.toJSON()
+      const patient = await Patient.create(req.body)
+      const patientJson = patient.toJSON()
       res.send({
-        user: userJson,
-        token: jwtSignUser(userJson)
+        patient: patientJson,
+        token: jwtSignPatient(patientJson)
       })
     } catch (err) {
       res.status(400).send({
@@ -27,19 +27,19 @@ module.exports = {
   async login (req, res) {
     try {
       const {email, password} = req.body
-      const user = await User.findOne({
+      const patient = await Patient.findOne({
         where: {
           email: email
         }
       })
-      if (!user) {
+      if (!patient) {
         res.status(403).send({
           error: 'The login information was incorrect'
         })
         return
       }
 
-      const isPasswordValid = user.comparePassword(password)
+      const isPasswordValid = patient.comparePassword(password)
       if (!isPasswordValid) {
         res.status(403).send({
           error: 'The login information was incorrect'
@@ -47,10 +47,10 @@ module.exports = {
         return
       }
 
-      const userJson = user.toJSON()
+      const patientJson = patient.toJSON()
       res.send({
-        user: userJson,
-        token: jwtSignUser(userJson)
+        patient: patientJson,
+        token: jwtSignPatient(patientJson)
       })
     } catch (err) {
       res.status(500).send({
