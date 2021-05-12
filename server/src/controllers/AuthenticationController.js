@@ -1,10 +1,10 @@
-const {Patient} = require('../models')
+const {User} = require('../models')
 const jwt = require('jsonwebtoken')
 const config = require('../config/config')
 
-function jwtSignPatient (patient) {
+function jwtSignUser (user) {
   const ONE_WEEK = 60 * 60 * 24 * 7
-   return jwt.sign(patient, config.authentication.jwtSecret, {
+   return jwt.sign(user, config.authentication.jwtSecret, {
      expiresIn: ONE_WEEK
    })
 }
@@ -12,11 +12,11 @@ function jwtSignPatient (patient) {
 module.exports = {
   async register (req, res) {
     try {
-      const patient = await Patient.create(req.body)
-      const patientJson = patient.toJSON()
+      const user = await User.create(req.body)
+      const userJson = user.toJSON()
       res.send({
-        patient: patientJson,
-        token: jwtSignPatient(patientJson)
+        user: userJson,
+        token: jwtSignUser(userJson)
       })
     } catch (err) {
       res.status(400).send({
@@ -26,20 +26,21 @@ module.exports = {
   },
   async login (req, res) {
     try {
-      const {email, password} = req.body
-      const patient = await Patient.findOne({
+      const {email, password, type} = req.body
+      const user = await User.findOne({
         where: {
-          email: email
+          email: email,
+          type: type
         }
       })
-      if (!patient) {
+      if (!user) {
         res.status(403).send({
           error: 'The login information was incorrect'
         })
         return
       }
 
-      const isPasswordValid = patient.comparePassword(password)
+      const isPasswordValid = user.comparePassword(password)
       if (!isPasswordValid) {
         res.status(403).send({
           error: 'The login information was incorrect'
@@ -47,10 +48,10 @@ module.exports = {
         return
       }
 
-      const patientJson = patient.toJSON()
+      const userJson = user.toJSON()
       res.send({
-        patient: patientJson,
-        token: jwtSignPatient(patientJson)
+        user: userJson,
+        token: jwtSignUser(userJson)
       })
     } catch (err) {
       res.status(500).send({

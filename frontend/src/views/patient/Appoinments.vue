@@ -9,7 +9,7 @@
         <v-row class="ma-0">
           <v-col cols="12" class="pa-3">
             <p class="text-h5 font-weight-bold mt-16 mx-16">Appointments schedule</p>
-            <p class="text-subtitle1 font-weight-regular mx-16 my-0">Contact +40 056 033 43 43 to change an appointment</p>
+            <p class="text-subtitle1 font-weight-regular mx-16 my-0">Contact your supervisor to change an appointment</p>
           </v-col>
         </v-row>
         <v-row class="ma-0">
@@ -92,8 +92,55 @@
                       :events="events"
                       :event-color="getEventColor"
                       :type="type"
-                      @change="updateRange"
+                      first-interval="7"
+                      @click:event="showEvent"
                     ></v-calendar>
+                    <v-menu
+                      v-model="selectedOpen"
+                      :close-on-content-click="false"
+                      :activator="selectedElement"
+                      offset-x
+                    >
+                      <v-card
+                        color="grey lighten-4"
+                        width="350px"
+                        flat
+                      >
+                        <v-toolbar
+                          :color="selectedEvent.color"
+                          dark
+                        >
+                          <v-toolbar-title
+                            v-if = "selectedEvent.startMinute > 9"
+                            class="text-h6 font-weight-bold"
+                            v-html="selectedEvent.name + '<br>' +
+                            selectedEvent.startHour + ':' +
+                            selectedEvent.startMinute + '-' +
+                            selectedEvent.endHour + ':' +
+                            selectedEvent.startMinute"></v-toolbar-title>
+                          <v-toolbar-title
+                            v-if = "selectedEvent.startMinute < 10"
+                            class="text-h6 font-weight-bold"
+                            v-html="selectedEvent.name + '<br>' +
+                            selectedEvent.startHour + ':0' +
+                            selectedEvent.startMinute + '-' +
+                            selectedEvent.endHour + ':0' +
+                            selectedEvent.startMinute"></v-toolbar-title>
+                        </v-toolbar>
+                        <v-card-text>
+                          <span v-html="selectedEvent.description"></span>
+                        </v-card-text>
+                        <v-card-actions>
+                          <v-btn
+                            text
+                            color="secondary"
+                            @click="selectedOpen = false"
+                          >
+                            Cancel
+                          </v-btn>
+                        </v-card-actions>
+                      </v-card>
+                    </v-menu>
                   </v-sheet>
                 </v-col>
               </v-row>
@@ -115,6 +162,8 @@
 </template>
 
 <script>
+import AppointmentService from '../../services/AppointmentService'
+
 export default {
   data () {
     return {
@@ -129,17 +178,37 @@ export default {
       selectedOpen: false,
       events: [],
       colors: ['#76C6D1', '#00A73E', '#FF7D01'],
-      names: ['Meeting', 'Holiday', 'PTO', 'Travel', 'Event', 'Birthday', 'Conference', 'Party'],
-      user: {
-        appointments: [
-          {date: '12/02/2021', title: 'Results #1', text: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.'},
-          {date: '12/02/2021', title: 'Results #2', text: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. '}
-        ]
-      }
+      appointments: []
     }
   },
-  mounted () {
+  async mounted () {
     this.$refs.calendar.checkChange()
+
+    this.appointments = (await AppointmentService.index()).data
+
+    const events = []
+
+    for (let i = 0; i < this.appointments.length; i++) {
+      const allDay = 0
+      const dt = new Date(this.appointments[i].date)
+      const hr = dt.getUTCHours() + 3
+      const minute = dt.getUTCMinutes()
+      const first = new Date(dt - (dt % 900000))
+      const second = new Date(first.getTime() + 3 * 900000)
+      events.push({
+        name: this.appointments[i].name,
+        start: first,
+        startHour: hr,
+        startMinute: minute,
+        end: second,
+        endHour: hr + 2,
+        description: this.appointments[i].description,
+        color: this.colors[this.rnd(0, this.colors.length - 1)],
+        timed: !allDay
+      })
+    }
+
+    this.events = events
   },
   methods: {
     getEventColor (event) {
@@ -151,31 +220,23 @@ export default {
     next () {
       this.$refs.calendar.next()
     },
-    updateRange ({ start, end }) {
-      const events = []
-
-      const min = new Date(`${start.date}T00:00:00`)
-      const max = new Date(`${end.date}T23:59:59`)
-      const days = (max.getTime() - min.getTime()) / 86400000
-      const eventCount = this.rnd(days, days + 20)
-
-      for (let i = 0; i < eventCount; i++) {
-        const allDay = this.rnd(0, 3) === 0
-        const firstTimestamp = this.rnd(min.getTime(), max.getTime())
-        const first = new Date(firstTimestamp - (firstTimestamp % 900000))
-        const secondTimestamp = this.rnd(2, allDay ? 288 : 8) * 900000
-        const second = new Date(first.getTime() + secondTimestamp)
-
-        events.push({
-          name: this.names[this.rnd(0, this.names.length - 1)],
-          start: first,
-          end: second,
-          color: this.colors[this.rnd(0, this.colors.length - 1)],
-          timed: !allDay
-        })
+    showEvent ({ nativeEvent, event }) {
+      const open = () => {
+        this.selectedEvent = event
+        this.selectedElement = nativeEvent.target
+        setTimeout(() => {
+          this.selectedOpen = true
+        }, 10)
       }
 
-      this.events = events
+      if (this.selectedOpen) {
+        this.selectedOpen = false
+        setTimeout(open, 10)
+      } else {
+        open()
+      }
+
+      nativeEvent.stopPropagation()
     },
     rnd (a, b) {
       return Math.floor((b - a + 1) * Math.random()) + a

@@ -1,0 +1,65 @@
+[
+  {
+    "userId": "1",
+    "date": "2021-03-21",
+    "title": "Results #1",
+    "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+    "healthCoef": "8"
+  },
+  {
+    "userId": "1",
+    "date": "2021-04-10",
+    "title": "Results #2",
+    "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+    "healthCoef": "20"
+  },
+  {
+    "userId": "1",
+    "date": "2021-04-20",
+    "title": "Results #3",
+    "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+    "healthCoef": "12"
+  },
+  {
+    "userId": "1",
+    "date": "2021-03-21",
+    "title": "Results #1",
+    "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+    "healthCoef": "25"
+  },
+  {
+    "userId": "1",
+    "date": "2021-03-21",
+    "title": "Results #1",
+    "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+    "healthCoef": "16"
+  },
+  {
+    "userId": "1",
+    "date": "2021-03-21",
+    "title": "Results #1",
+    "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+    "healthCoef": "14"
+  },
+  {
+    "userId": "2",
+    "date": "2021-03-21",
+    "title": "Results #1",
+    "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+    "healthCoef": "5"
+  },
+  {
+    "userId": "2",
+    "date": "2021-04-10",
+    "title": "Results #2",
+    "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+    "healthCoef": "8"
+  },
+  {
+    "userId": "2",
+    "date": "2021-04-20",
+    "title": "Results #3",
+    "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+    "healthCoef": "6"
+  }
+]

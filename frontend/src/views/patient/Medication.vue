@@ -11,8 +11,9 @@
             <p class="text-h5 font-weight-bold mt-16 mx-16">Welcome Jane Smith !</p>
             <p class="text-subtitle1 font-weight-regular mx-16">Don't forget about your daily medication!</p>
             <!-- efecte adverse -->
-            <v-card width="35vh" height="20vh" class="mx-16 mt-16 pa-5 rounded-xl" align="center" elevation="2">
+            <v-card width="35vh" height="20vh" class="mx-16 mt-16 pa-2 rounded-xl" align="center" elevation="2">
               <v-card-text class="font-weight-bold text-h6">Efecte adverse</v-card-text>
+              <v-card-text class="font-weight-regular text-h7">{{ clinicalTrial.adverseEffects }}</v-card-text>
             </v-card>
           </v-col>
           <v-col cols="6" class="pa-10">
@@ -27,20 +28,35 @@
                 <img width="35vh" class="mx-2 mt-2 mb-6" :src="medImage.url" :alt="medImage.alt">
                 <p class="text-h5 font-weight-bold text-color mx-2 mt-2 mb-6">Medication</p>
               </v-card-title>
-
-              <v-card-text>
-                <v-row
-                  align="center"
-                  class="mx-0"
-                  v-for="item in user.medication"
-                  :key="item"
-                >
-                  <p class="font-weight-bold medication-text mx-4">{{item.name}}</p>
-                  <p class="font-weight-medium mx-4">- {{item.quantity}}</p>
-                  <v-spacer></v-spacer>
-                  <p class="font-weight-medium mx-4">{{item.period}}</p>
-                </v-row>
-              </v-card-text>
+              <row align="center">
+                <v-simple-table>
+                  <template>
+                    <thead>
+                      <tr>
+                        <th class="text-center">
+                          Name
+                        </th>
+                        <th class="text-center">
+                          Quantity
+                        </th>
+                        <th class="text-center">
+                          Period
+                        </th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr
+                        v-for="item in medication"
+                        :key="item.id"
+                      >
+                        <td>{{ item.name }}</td>
+                        <td>{{ item.qtyPerUse }}</td>
+                        <td>{{ item.period }}</td>
+                      </tr>
+                    </tbody>
+                  </template>
+                </v-simple-table>
+              </row>
               <v-row class="bottom">
                 <v-col></v-col>
                 <v-spacer></v-spacer>
@@ -70,28 +86,32 @@
 </template>
 
 <script>
+import TrialsService from '../../services/TrialsService'
+import MedicationService from '../../services/MedicationService'
+
 export default {
   data () {
     return {
       img: {
-        url: require('@/assets/illustration-3.png'),
+        url: require('../../assets/illustration-3.png'),
         alt: 'Illustration'
       },
       chatImage: {
-        url: require('@/assets/chat.png'),
+        url: require('../../assets/chat.png'),
         alt: 'Icon'
       },
       medImage: {
-        url: require('@/assets/pills.png'),
+        url: require('../../assets/pills.png'),
         alt: 'Icon'
       },
-      user: {
-        medication: [
-          {name: 'Siofor 500mg', quantity: '1 pill', period: 'twice a day'},
-          {name: 'Siofor 500mg', quantity: '1 pill', period: 'twice a day'}
-        ]
-      }
+      medication: [],
+      clinicalTrial: {}
     }
+  },
+  async mounted () {
+    this.clinicalTrial = (await TrialsService.index()).data
+
+    this.medication = (await MedicationService.index()).data
   }
 }
 </script>
@@ -114,7 +134,7 @@ export default {
 }
 
 .bottom {
-  margin-top: 20vh;
+  margin-top: 2vh;
   margin-right: 1.3vh;
 }
 

@@ -9,10 +9,10 @@
         class="bradius ma-0 pa-0">
         <v-row class="ma-0">
           <v-col cols="6" class="pa-5">
-            <p class="text-h5 font-weight-bold mt-16 mx-16">Welcome {{ user.name }} !</p>
+            <p class="text-h5 font-weight-bold mt-16 mx-16">Welcome {{ user.firstName }} {{ user.lastName }}!</p>
             <p class="text-subtitle1 font-weight-regular mx-16">Let's check your test results</p>
             <v-card width="30vh" class="mx-16 mt-16 pa-5 rounded-xl" align="center" elevation="2">
-              <v-card-text class="font-weight-bold text-h6">Clinical Trial Phase {{ user.clinicalTrialPhase }}</v-card-text>
+              <v-card-text class="font-weight-bold text-h6">{{ clinicalTrial.title }} Phase {{ clinicalTrial.phase }}</v-card-text>
             </v-card>
           </v-col>
           <v-col cols="6" class="pa-10">
@@ -23,10 +23,26 @@
           <!-- health graphic -->
           <v-col cols="6" class="pa-5">
             <v-card width="52vh" height="45vh" class="rounded-xl ml-16" elevation="2">
-
+              <v-card-title>
+                <p class="text-h5 font-weight-bold text-color mx-2 mt-2 mb-0">Health Curve</p>
+              </v-card-title>
+              <div class="healthGraphic">
+                <v-sparkline
+                  :value="graphicValues"
+                  color="blue"
+                  line-width="2"
+                  stroke-linecap="round"
+                  padding="8"
+                  smooth="16"
+                  :gradient="['#fd2d2d', '#fe8e79', '#ffc4a4', '#ffffff']"
+                  gradient-direction="top"
+                  fill
+                  height="150vh"
+                ></v-sparkline>
+              </div>
             </v-card>
           </v-col>
-          <!-- results documents -->
+          <!-- reports documents -->
           <v-col cols="6" class="pa-5">
             <v-card width="52vh" height="45vh" class="rounded-xl" elevation="2">
               <v-card-title>
@@ -35,19 +51,20 @@
                <v-card-text>
                 <v-list>
                   <v-list-item-group
-                    v-model="selectedItem"
                     color="primary"
                   >
                     <v-list-item
-                      v-for="item in user.reports"
-                      :key="item"
+                      v-for="item in reports"
+                      :key="item.id"
+                      :href="item.link"
+                      download
                     >
                       <v-list-item-icon class="mr-2">
                         <v-icon color="#76C6D1">mdi-file-document</v-icon>
                       </v-list-item-icon>
                       <v-list-item-content>
                         <v-list-item-title v-text="item.title"></v-list-item-title>
-                        <v-list-item-subtitle v-text="item.size"></v-list-item-subtitle>
+                        <v-list-item-subtitle>{{item.size}} MB</v-list-item-subtitle>
                       </v-list-item-content>
                       <v-icon color="#76C6D1">mdi-download</v-icon>
                     </v-list-item>
@@ -56,7 +73,7 @@
               </v-card-text>
             </v-card>
           </v-col>
-          <p class="mt-3">You can find more details about this study <a href="user.clinicalTrialLink">here</a></p>
+          <p class="mt-3">You can find more details about this study <a :href="clinicalTrial.link">here</a></p>
         </v-row>
       </v-card>
     </v-col>
@@ -72,11 +89,11 @@
         <template v-slot:prepend>
           <v-list-item two-line class="ma-5">
             <v-list-item-avatar>
-              <img :src="user.img">
+              <img :src="require('../../assets/Pictures/' + user.img)">
             </v-list-item-avatar>
 
             <v-list-item-content>
-              <v-list-item-title class="font-weight-bold text-h6">{{ user.name }}</v-list-item-title>
+              <v-list-item-title class="font-weight-bold text-h6">{{ user.firstName }} {{ user.lastName }}</v-list-item-title>
               <v-list-item-subtitle class="text-size">{{ user.birthDate }}</v-list-item-subtitle>
             </v-list-item-content>
           </v-list-item>
@@ -115,7 +132,7 @@
             </v-card>
           </v-col>
         </v-row>
-        <v-row v-for="result in user.results" :key="result">
+        <v-row v-for="result in results" :key="result.id">
           <v-card
             class="pa-5 mx-13 my-5 text-size rounded-lg"
             align="start"
@@ -134,34 +151,42 @@
 </template>
 
 <script>
+import {mapState} from 'vuex'
+import UserService from '../../services/UserService'
+import ResultsService from '../../services/ResultsService'
+import ReportsService from '../../services/ReportsService'
+import TrialsService from '../../services/TrialsService'
+
 export default {
   data () {
     return {
       img: {
-        url: require('@/assets/illustration-2.png'),
+        url: require('../../assets/illustration-2.png'),
         alt: 'Illustration'
       },
-      user: {
-        img: require('@/assets/pic.png'),
-        name: 'Jane Smith',
-        birthDate: '20.04.1960',
-        bloodType: 'A-',
-        height: '178',
-        weight: '55',
-        clinicalTrial: '',
-        clinicalTrialPhase: 'I',
-        clinicalTrialLink: '',
-        results: [
-          {date: '12/02/2021', title: 'Results #1', text: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.'},
-          {date: '12/02/2021', title: 'Results #2', text: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. '}
-        ],
-        reports: [
-          {title: 'Test results - 23.03.2021', size: '2 MB'},
-          {title: 'Test results - 10.02.2021', size: '3 MB'},
-          {title: 'Test results - 5.01.2021', size: '3 MB'}
-        ]
-      }
+      user: {},
+      results: [],
+      reports: [],
+      clinicalTrial: {},
+      graphicValues: [0]
     }
+  },
+  computed: {
+    ...mapState([
+      'isUserLoggedIn',
+      'user'
+    ])
+  },
+  async mounted () {
+    this.user = (await UserService.show()).data
+
+    this.results = (await ResultsService.index()).data
+    for (let i = 0; i < this.results.length; i++) {
+      this.graphicValues.push(this.results[i].healthCoef)
+    }
+    this.reports = (await ReportsService.index()).data
+
+    this.clinicalTrial = (await TrialsService.index()).data
   }
 }
 </script>
@@ -181,6 +206,10 @@ export default {
 
 .text-color {
   color:rgb(80, 80, 80);
+}
+
+.healthGraphic {
+  margin-top: 7vh;
 }
 
 </style>

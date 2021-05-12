@@ -1,0 +1,29 @@
+[
+  {
+    "title": "Trial #1",
+    "phase": "I",
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+    "adverseEffects": "somnolenta, dureri de cap, stare de voma",
+    "supervisorId": "1",
+    "status": "active",
+    "link": "fhghfhgfhghgfh.com"
+  },
+  {
+    "title": "Trial #2",
+    "phase": "I",
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+    "adverseEffects": "somnolenta, dureri de cap, stare de voma",
+    "supervisorId": "1",
+    "status": "active",
+    "link": "fhghfhgfhghgfh.com"
+  },
+  {
+    "title": "Trial #3",
+    "phase": "I",
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+    "adverseEffects": "somnolenta, dureri de cap, stare de voma",
+    "supervisorId": "1",
+    "status": "finished",
+    "link": "fhghfhgfhghgfh.com"
+  }
+]

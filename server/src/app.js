@@ -12,6 +12,8 @@ app.use(express.urlencoded({
 }))
 app.use(cors())
 
+require('./passport')
+
 require('./routes')(app)
 
 sequelize.sync() // {force: true} to delete all tables from database

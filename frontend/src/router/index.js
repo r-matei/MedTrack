@@ -1,13 +1,26 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import HomePatient from '../views/HomePatient.vue'
-import Patient from '../views/Patient.vue'
-import AppointmentsPatient from '../views/AppoinmentsPatient.vue'
-import MedicationPatient from '../views/MedicationPatient.vue'
-import Register from '../views/Register.vue'
-import Questionnaire from '../views/Questionnaire.vue'
-import ClinicalTrials from '../views/ClinicalTrials.vue'
-import Survey from '../views/Survey.vue'
+
+// Patient
+import HomePatient from '../views/patient/Home.vue'
+import Patient from '../views/patient/Patient.vue'
+import AppointmentsPatient from '../views/patient/Appoinments.vue'
+import MedicationPatient from '../views/patient/Medication.vue'
+import Register from '../views/patient/Register.vue'
+import Questionnaire from '../views/patient/Questionnaire.vue'
+import ClinicalTrials from '../views/patient/ClinicalTrials.vue'
+import Survey from '../views/patient/Survey.vue'
+
+// Supervisor
+import RegisterSupervisor from '../views/supervisor/Register.vue'
+import Supervisor from '../views/supervisor/Supervisor.vue'
+import HomeSupervisor from '../views/supervisor/Home.vue'
+import Trials from '../views/supervisor/Trials.vue'
+import Patients from '../views/supervisor/Patients.vue'
+import AppointmentsSupervisor from '../views/supervisor/Appointments.vue'
+import SurveySupervisor from '../views/supervisor/Survey.vue'
+import ViewTrial from '../views/supervisor/ViewTrial.vue'
+import ViewPatient from '../views/supervisor/ViewPatient.vue'
 
 Vue.use(Router)
 
@@ -25,7 +38,7 @@ export default new Router({
         },
         {
           path: 'appointments',
-          name: 'Appointments',
+          name: 'Patient Appointments',
           component: AppointmentsPatient
         },
         {
@@ -37,7 +50,7 @@ export default new Router({
     },
     {
       path: '/register',
-      name: 'register',
+      name: 'Register Patient',
       component: Register
     },
     {
@@ -54,6 +67,57 @@ export default new Router({
       path: '/survey',
       name: 'survey',
       component: Survey
+    },
+    {
+      path: '/register-supervisor',
+      name: 'Register Supervisor',
+      component: RegisterSupervisor
+    },
+    {
+      path: '/supervisor',
+      name: 'Supervisor',
+      component: Supervisor,
+      children: [
+        {
+          path: 'supervisor-home',
+          name: 'Supervisor Home',
+          component: HomeSupervisor
+        },
+        {
+          path: 'trials',
+          name: 'Trials',
+          component: Trials
+        },
+        {
+          path: 'trials/:trialId',
+          name: 'trial',
+          component: ViewTrial
+        },
+        {
+          path: 'patients',
+          name: 'Patients',
+          component: Patients
+        },
+        {
+          path: 'patients/:patientId',
+          name: 'viewPatient',
+          component: ViewPatient
+        },
+        {
+          path: 'supervisor-appointments',
+          name: 'Supervisor Appointments',
+          component: AppointmentsSupervisor
+        }
+      ]
+    },
+    {
+      path: '/survey-supervisor',
+      name: 'Supervisor Survey',
+      component: SurveySupervisor
+    },
+    {
+      path: '*',
+      redirect: 'register'
     }
   ]
 })

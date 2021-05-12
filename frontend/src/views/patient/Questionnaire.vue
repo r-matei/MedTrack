@@ -9,8 +9,6 @@
           <v-card-title class="text-h4 font-weight-medium">
             Questionnaire
           </v-card-title>
-        </v-row>
-        <v-row justify="center">
           <v-card-text class="mx-15">
             "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
           </v-card-text>
@@ -109,13 +107,15 @@ export default {
     return {
       step: 1,
       img: {
-        url: require('@/assets/illustration-1.png'),
+        url: require('../../assets/illustration-1.png'),
         name: 'illustration'
       },
       q1:
         {
           id: 1,
           title: 'Question1?',
+          input: false,
+          inputText: '',
           ans: [
             {
               text: 'yes',
@@ -131,6 +131,8 @@ export default {
         {
           id: 2,
           title: 'Question2?',
+          input: false,
+          inputText: '',
           ans: [
             {
               text: 'yes',
@@ -146,6 +148,8 @@ export default {
         {
           id: 3,
           title: 'Question3?',
+          input: false,
+          inputText: '',
           ans: [
             {
               text: 'yes',

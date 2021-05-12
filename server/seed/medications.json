@@ -1,0 +1,34 @@
+[
+  {
+    "clinicalTrialId": "1",
+    "type": "pill",
+    "name": "Medication #1",
+    "period": "6 hours",
+    "qtyPerUse": "2",
+    "qtyPerPacient": "60"
+  },
+  {
+    "clinicalTrialId": "1",
+    "type": "pill",
+    "name": "Medication #2",
+    "period": "4 hours",
+    "qtyPerUse": "1",
+    "qtyPerPacient": "80"
+  },
+  {
+    "clinicalTrialId": "1",
+    "type": "pill",
+    "name": "Medication #3",
+    "period": "12 hours",
+    "qtyPerUse": "1",
+    "qtyPerPacient": "30"
+  },
+  {
+    "clinicalTrialId": "1",
+    "type": "vaccine",
+    "name": "Vaccine #1",
+    "period": "30 days",
+    "qtyPerUse": "1",
+    "qtyPerPacient": "3"
+  }
+]

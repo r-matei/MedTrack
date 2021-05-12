@@ -13,13 +13,14 @@
     </v-col>
     <v-col cols="8" class="px-7 py-0" align-self="start">
       <p class="text-h4 font-weight-medium ma-16">Here is a list of tests you can attend to:</p>
-      <div v-for="item in trials" :key="item" class="ml-16 d-flex">
+      <div v-for="item in selectedTrials" :key="item" class="ml-16 d-flex">
         <v-checkbox
           v-model="item.check"
         >
           <div slot='label'>{{item.title}} - <a :href="item.link">read more</a></div>
         </v-checkbox>
       </div>
+      <div class="text-error" v-html="error"/>
       <v-spacer></v-spacer>
       <v-row class="bottom-page" no-gutters>
         <v-col cols="10" align-start>
@@ -37,32 +38,65 @@
 </template>
 
 <script>
+import UserService from '../../services/UserService'
+import TrialsService from '../../services/TrialsService'
 
 export default {
   data () {
     return {
-      trials: [
-        {
-          title: 'Trial1',
-          check: false,
-          link: 'https://vuetifyjs.com/en/components/grids/'
-        },
-        {
-          title: 'Trial2',
-          check: false,
-          link: 'https://vuetifyjs.com/en/components/grids/'
-        },
-        {
-          title: 'Trial3',
-          check: false,
-          link: 'https://vuetifyjs.com/en/components/grids/'
+      trials: [],
+      selectedTrials: [],
+      user: {},
+      checkTrial: false,
+      error: null
+    }
+  },
+  async mounted () {
+    try {
+      this.user = (await UserService.show()).data
+    } catch (err) {
+      console.log(err)
+    }
+
+    try {
+      this.trials = (await TrialsService.show()).data
+      this.selectedTrials = this.trials.map(trial => {
+        let props = {
+          'id': trial.id,
+          'title': trial.title,
+          'supervisorId': trial.supervisorId,
+          'link': trial.link,
+          'check': false
         }
-      ]
+        return props
+      })
+    } catch (err) {
+      console.log(err)
     }
   },
   methods: {
-    submit () {
-      alert('Submit to blah and show blah and etc.')
+    async submit () {
+      this.error = null
+
+      this.selectedTrials.forEach(element => {
+        if (element.check === true) {
+          this.user.clinicalTrialId = element.id
+          this.user.supervisorId = element.supervisorId
+          this.checkTrial = true
+        }
+      })
+
+      if (this.checkTrial === false) {
+        this.error = 'Please choose a trial to attend'
+        return
+      }
+
+      try {
+        await UserService.put(this.user)
+        this.$router.push('/survey')
+      } catch (err) {
+        console.log(err)
+      }
     }
   }
 }
@@ -76,6 +110,10 @@ export default {
 
 .bottom-page {
   margin-top: 45vh;
+}
+
+.text-error {
+  color: red;
 }
 
 .fixed {

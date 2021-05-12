@@ -144,16 +144,16 @@
 </template>
 
 <script>
-import AuthenticationService from '@/services/AuthenticationService'
+import AuthenticationService from '../../services/AuthenticationService'
 export default {
   data () {
     return {
       img: {
-        url: require('@/assets/poza-login.jpeg'),
+        url: require('../../assets/poza-login.jpeg'),
         name: 'LoginImage'
       },
       logo: {
-        url: require('@/assets/logo-blue.png'),
+        url: require('../../assets/logo-blue.png'),
         name: 'Logo'
       },
       dialog: true,
@@ -203,10 +203,10 @@ export default {
           email: this.userRegister.email,
           password: this.userRegister.registerPassword
         })
-        this.$store.dispatch('setToken', response.data.token)
-        this.$store.dispatch('setPatient', response.data.patient)
+        this.$store.dispatch('setUserToken', response.data.token)
+        this.$store.dispatch('setUser', response.data.user)
         this.$router.push({
-          name: 'questionnaire'
+          path: '/survey-supervisor'
         })
       } catch (error) {
         this.errorRegister = error.response.data.error
@@ -227,12 +227,13 @@ export default {
       try {
         const response = await AuthenticationService.login({
           email: this.userLogin.loginEmail,
-          password: this.userLogin.loginPassword
+          password: this.userLogin.loginPassword,
+          type: 'supervisor'
         })
-        this.$store.dispatch('setToken', response.data.token)
-        this.$store.dispatch('setPatient', response.data.patient)
+        this.$store.dispatch('setUserToken', response.data.token)
+        this.$store.dispatch('setUser', response.data.user)
         this.$router.push({
-          name: 'Home'
+          path: '/supervisor/supervisor-home'
         })
       } catch (error) {
         this.errorLogin = error.response.data.error
