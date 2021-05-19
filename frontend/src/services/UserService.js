@@ -13,8 +13,8 @@ export default {
   showPatients () {
     return Api().get('patients')
   },
-  // show id patient
-  showPatient (patientId) {
-    return Api().get(`patient/${patientId}`)
+  // show id user
+  showUser (userId) {
+    return Api().get(`user/${userId}`)
   }
 }

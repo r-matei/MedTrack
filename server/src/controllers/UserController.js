@@ -45,13 +45,13 @@ module.exports = {
       })
     }
   },
-  async showPatient (req, res) {
+  async showUser (req, res) {
     try {
-      const user = await User.findByPk(req.params.patientId)
+      const user = await User.findByPk(req.params.userId)
       res.send(user)
     } catch (err) {
       res.status(500).send({
-        error: 'an error has occured trying to show the patients'
+        error: 'an error has occured trying to show the patient'
       })
     }
   }

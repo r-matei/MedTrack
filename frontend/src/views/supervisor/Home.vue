@@ -66,12 +66,91 @@
           </v-card>
         </v-row>
         <!-- Online chat -->
-        <v-row>
+        <v-row class="ma-0">
           <v-card width="80vh" height="40vh" class="mx-16 mt-16 pa-0 rounded-xl" elevation="2">
-            <v-card-title>
-                <img width="35vh" class="ma-2" :src="chatImage.url" :alt="chatImage.alt">
-                <p class="text-h5 font-weight-bold text-color ma-2">Online chat</p>
-              </v-card-title>
+            <v-row class="ma-0 fill-height">
+              <v-col cols="4" class="pa-0 ma-0">
+                <v-card-title>
+                  <img width="35vh" class="ma-2" :src="chatImage.url" :alt="chatImage.alt">
+                  <p class="text-h5 font-weight-bold text-color ma-2">Online chat</p>
+                </v-card-title>
+                <v-list>
+                  <v-list-item-group
+                    v-model="indexChatPatient"
+                    color="#76C6D1"
+                  >
+                    <v-list-item
+                      v-for="(patient, index) in chatPatients"
+                      :key="index"
+                      @click="indexChatPatient = index">
+                      <v-list-item-avatar height="3vh" min-width="3vh" width="3vh">
+                        <v-img :src="require('../../assets/Pictures/' + patient.img)"></v-img>
+                      </v-list-item-avatar>
+                      <v-list-item-content>
+                        <v-list-item-title class="chat-patient-name">{{ patient.firstName }} {{ patient.lastName }}</v-list-item-title>
+                      </v-list-item-content>
+                    </v-list-item>
+                  </v-list-item-group>
+                </v-list>
+              </v-col>
+              <v-divider vertical inset/>
+              <v-col cols="8" class="pa-4" v-if="chatPatients[indexChatPatient]">
+                <!-- chat header -->
+                <div class="mb-5">
+                  <v-avatar>
+                    <v-img :src="require('../../assets/Pictures/' + chatPatients[indexChatPatient].img)"></v-img>
+                  </v-avatar>
+                  <p class="d-inline text-h7 font-weight-bold text-color ml-3">{{ chatPatients[indexChatPatient].firstName }} {{ chatPatients[indexChatPatient].lastName }}</p>
+                </div>
+                <!-- chat messages -->
+                <v-card
+                  height="24vh"
+                  elevation="0"
+                  class="scroll-y"
+                  >
+                  <v-row class="align-end fill-height">
+                    <v-col class="pa-0">
+                      <div class="my-2" v-for="message in messages" :key="message">
+                        <span v-if="message.type === 'send' && message.to === chatPatients[indexChatPatient].id" class="d-flex justify-end mr-5">
+                          {{message.message}}
+                          <v-avatar size="3vh">
+                            <v-img :src="require('../../assets/Pictures/' + user.img)"></v-img>
+                          </v-avatar>
+                        </span>
+                        <span v-if="message.type === 'receive' && message.user === chatPatients[indexChatPatient].id" class="ml-5">
+                          {{message.message}}
+                          <v-avatar size="3vh">
+                            <v-img :src="require('../../assets/Pictures/' + chatPatients[indexChatPatient].img)"></v-img>
+                          </v-avatar>
+                        </span>
+                      </div>
+                    </v-col>
+                  </v-row>
+
+                </v-card>
+
+                <!-- write new message -->
+                <v-row class="ma-0">
+                  <v-col cols="11">
+                    <v-text-field
+                    label="Aa"
+                    solo
+                    v-model="newMessage"
+                    dense
+                  ></v-text-field>
+                  </v-col>
+                  <v-col cols="1" class="pt-3 pl-0">
+                    <v-btn
+                    icon
+                    color="grey"
+                    @click="send()"
+                  >
+                    <v-icon>mdi-send</v-icon>
+                  </v-btn>
+                  </v-col>
+                </v-row>
+              </v-col>
+            </v-row>
           </v-card>
         </v-row>
       </v-card>
@@ -99,7 +178,7 @@
         </template>
         <p class="font-weight-bold text-subtitle-1 ml-5">This week's appointments</p>
         <!-- appointments -->
-        <v-row v-for="pair in pairs" :key="pair.date">
+        <v-row v-for="pair in pairs" :key="pair">
           <v-list-item two-line class="mx-5 mt-5">
               <v-list-item-avatar>
                 <v-img :src="require('../../assets/Pictures/' + pair.patient.img)"></v-img>
@@ -196,6 +275,9 @@ import AppointmentService from '../../services/AppointmentService'
 import TrialsService from '../../services/TrialsService'
 import ReportsService from '../../services/ReportsService'
 
+import io from 'socket.io-client'
+var socket = io('http://localhost:8081')
+
 export default {
   data () {
     return {
@@ -210,7 +292,9 @@ export default {
       user: {},
       appointments: [],
       patients: [],
-      selectedPatients: [],
+      selectedPatients: [], // pacientii cu care avem programari in saptamana curenta
+      chatPatients: [], // pacientii cu care putem vorbi in chat
+      indexChatPatient: 0, // pacientul selectat cu care discutam in chat
       trials: [],
       appointmentsNr: '',
       reportTab: false,
@@ -221,9 +305,24 @@ export default {
       },
       error: '',
       required: (value) => !!value || 'Required.',
-      found: 0
+      found: 0,
+      // chat data
+      newMessage: null,
+      messages: [],
+      username: null
     }
   },
+  created () {
+    socket.on('chat-message', (data) => {
+      this.messages.push({
+        message: data.message,
+        user: data.user,
+        type: 'receive',
+        to: data.to
+      })
+    })
+  },
+
   computed: {
     ...mapState([
       'isUserLoggedIn'
@@ -255,21 +354,53 @@ export default {
     endDate.setDate(endDate.getDate() + (7 - endDate.getDay()) % 7)
 
     var id = this.user.id
+
+    // selecteaza programarile din saptamana curenta
     this.appointments = this.appointments.filter(function (a) {
       var d = new Date(a.date)
       return ((d >= startDate && d <= endDate) && (a.supervisorId === id))
     })
 
+    // populeaza chatPatients
+    for (let j = 0; j < this.patients.length; j++) {
+      if (this.patients[j].supervisorId === this.user.id) {
+        let patientInfo = (({firstName, lastName, img, id}) => ({firstName, lastName, img, id}))(this.patients[j])
+        this.chatPatients.push(patientInfo)
+      }
+    }
+
+    // populeaza selectedPatients
     for (let i = 0; i < this.appointments.length; i++) {
       for (let j = 0; j < this.patients.length; j++) {
-        if ((this.patients[j].supervisorId === this.user.id) && (this.appointments[i].userId === this.patients[j].id)) {
-          let patientInfo = (({firstName, lastName, img}) => ({firstName, lastName, img}))(this.patients[j])
-          this.selectedPatients.push(patientInfo)
+        if (this.patients[j].supervisorId === this.user.id) {
+          let patientInfo = (({firstName, lastName, img, id}) => ({firstName, lastName, img, id}))(this.patients[j])
+          if (this.appointments[i].userId === this.patients[j].id) {
+            this.selectedPatients.push(patientInfo)
+          }
         }
       }
     }
+    // emit 'joined' event to server
+    this.username = this.user.id
+    socket.emit('joined', this.username)
   },
   methods: {
+    send () {
+      this.messages.push({
+        message: this.newMessage,
+        userId: this.username,
+        type: 'send',
+        to: this.chatPatients[this.indexChatPatient].id
+      })
+
+      socket.emit('chat-message', {
+        message: this.newMessage,
+        user: this.username,
+        type: 'send',
+        to: this.chatPatients[this.indexChatPatient].id
+      })
+      this.newMessage = null
+    },
     async addReport () {
       this.error = null
 
@@ -328,6 +459,10 @@ export default {
   margin-top: 7vh;
 }
 
+.chat-patient-name {
+  font-size: 1.5vh;
+}
+
 .centerBtn {
   margin: 5vh;
 }
@@ -336,4 +471,24 @@ export default {
   color: red;
 }
 
+.bottom {
+  position: absolute;
+  bottom: 0;
+}
+
+.scroll-y {
+  overflow-y: auto;
+  overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
+}
+
+::-webkit-scrollbar {
+  display: none;
+}
+
+.text-left {
+  position: relative;
+  left: 2px;
+  bottom: 3px;
+}
 </style>

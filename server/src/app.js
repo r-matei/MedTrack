@@ -4,7 +4,14 @@ const morgan = require('morgan')
 const {sequelize} = require('./models')
 const config = require('./config/config')
 const app = express()
+const http = require('http').Server(app)
+const io = require('socket.io')(http, {cors: {
+  origin: true,
+  credentials: true
+}})
 
+let users = [];
+ 
 app.use(morgan('combined'))
 app.use(express.json())
 app.use(express.urlencoded({
@@ -16,8 +23,29 @@ require('./passport')
 
 require('./routes')(app)
 
+io.on("connection", (socket) => {
+
+    socket.on('disconnect', () => {
+        console.log("A user disconnected");
+        users = users.filter((user) => user.socket != socket)
+    })
+
+    socket.on('chat-message', (data) => {
+      const receiver = users.find((user) => user.id == data.to)
+      if (receiver) {
+        receiver.socket.emit('chat-message', (data));
+      }
+    })
+
+    socket.on('joined', (data) => {
+       users.push({socket, id: data})
+       console.log("logged in user", data)
+    })
+
+})
+
 sequelize.sync() // {force: true} to delete all tables from database
   .then(() => {
-    app.listen(config.port)
+    http.listen(config.port)
     console.log(`Server started on port ${config.port}`)
   })

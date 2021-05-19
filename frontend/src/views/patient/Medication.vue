@@ -74,9 +74,62 @@
           <v-col cols="6" class="pa-5">
             <v-card width="70vh" height="45vh" class="rounded-xl" elevation="2">
               <v-card-title>
-                <img width="35vh" class="ma-2" :src="chatImage.url" :alt="chatImage.alt">
+                <img width="35vh" class="ml-2" :src="chatImage.url" :alt="chatImage.alt">
                 <p class="text-h5 font-weight-bold text-color ma-2">Online chat</p>
               </v-card-title>
+              <v-avatar class="ml-5 mt-0">
+                <v-img :src="require('../../assets/Pictures/' + supervisor.img)"></v-img>
+              </v-avatar>
+              <p class="d-inline text-h7 font-weight-bold text-color ml-3">Dr. {{ supervisor.firstName }} {{ supervisor.lastName }}</p>
+
+              <v-container>
+                <v-card
+                  height="24vh"
+                  elevation="0"
+                  class="scroll-y"
+                  >
+                  <v-row class="align-end fill-height">
+                    <v-col class="pa-0 mr-7 mb-2">
+                      <div class="my-2" v-for="message in messages" :key="message">
+                        <span v-if="message.type === 'send'" class="d-flex justify-end">
+                          {{message.message}}
+                          <v-avatar size="3vh">
+                            <v-img :src="require('../../assets/Pictures/' + user.img)"></v-img>
+                          </v-avatar>
+                        </span>
+                        <span v-if="message.type === 'receive'" class="ml-5">
+                          <v-avatar size="3vh">
+                            <v-img :src="require('../../assets/Pictures/' + supervisor.img)"></v-img>
+                          </v-avatar>
+                          {{message.message}}
+                        </span>
+                      </div>
+                    </v-col>
+                  </v-row>
+
+                </v-card>
+
+                <!-- write new message -->
+                <v-row class="mb-3 ml-2">
+                  <v-col cols="11">
+                    <v-text-field
+                    label="Aa"
+                    solo
+                    v-model="newMessage"
+                    dense
+                  ></v-text-field>
+                  </v-col>
+                  <v-col cols="1" class="pt-3 pl-0">
+                    <v-btn
+                    icon
+                    color="grey"
+                    @click="send()"
+                  >
+                    <v-icon>mdi-send</v-icon>
+                  </v-btn>
+                  </v-col>
+                </v-row>
+              </v-container>
             </v-card>
           </v-col>
         </v-row>
@@ -88,6 +141,10 @@
 <script>
 import TrialsService from '../../services/TrialsService'
 import MedicationService from '../../services/MedicationService'
+import UserService from '../../services/UserService'
+import {mapState} from 'vuex'
+import io from 'socket.io-client'
+var socket = io('http://localhost:8081')
 
 export default {
   data () {
@@ -105,13 +162,58 @@ export default {
         alt: 'Icon'
       },
       medication: [],
-      clinicalTrial: {}
+      clinicalTrial: {},
+      supervisor: {},
+      // chat data
+      newMessage: null,
+      messages: [],
+      username: null
     }
+  },
+  computed: {
+    ...mapState([
+      'isUserLoggedIn',
+      'user'
+    ])
+  },
+  created () {
+    socket.on('chat-message', (data) => {
+      this.messages.push({
+        message: data.message,
+        user: data.user,
+        type: 'receive',
+        to: data.to
+      })
+    })
   },
   async mounted () {
     this.clinicalTrial = (await TrialsService.index()).data
 
     this.medication = (await MedicationService.index()).data
+
+    this.supervisor = (await UserService.showUser(this.clinicalTrial.supervisorId)).data
+
+    // emit 'joined' event to server
+    this.username = this.user.id
+    socket.emit('joined', this.username)
+  },
+  methods: {
+    send () {
+      this.messages.push({
+        message: this.newMessage,
+        userId: this.username,
+        type: 'send',
+        to: this.supervisor.id
+      })
+
+      socket.emit('chat-message', {
+        message: this.newMessage,
+        user: this.username,
+        type: 'send',
+        to: this.supervisor.id
+      })
+      this.newMessage = null
+    }
   }
 }
 </script>
@@ -136,6 +238,16 @@ export default {
 .bottom {
   margin-top: 2vh;
   margin-right: 1.3vh;
+}
+
+.scroll-y {
+  overflow-y: auto;
+  overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
+}
+
+::-webkit-scrollbar {
+  display: none;
 }
 
 </style>

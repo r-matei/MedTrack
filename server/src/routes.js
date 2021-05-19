@@ -63,8 +63,8 @@ module.exports = (app) => {
   app.post('/addResults',
     ResultsController.post)
 
-  app.get('/patient/:patientId',
-    UserController.showPatient)
+  app.get('/user/:userId',
+    UserController.showUser)
 
   app.get('/trial/:trialId',
     TrialsController.showTrial)

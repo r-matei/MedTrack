@@ -167,7 +167,7 @@ export default {
   },
   async mounted () {
     const patientId = this.route.params.patientId
-    this.patient = (await UserService.showPatient(patientId)).data
+    this.patient = (await UserService.showUser(patientId)).data
 
     function calculateAge (birthday) {
       var d = new Date(birthday)
