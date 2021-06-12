@@ -6,6 +6,7 @@ const ReportsController = require('./controllers/ReportsController')
 const TrialsController = require('./controllers/TrialsController')
 const MedicationController = require('./controllers/MedicationController')
 const AppointmentController = require('./controllers/AppointmentController')
+const MessageController = require('./controllers/MessageController')
 
 const isAuthenticated = require('./policies/isAuthenticated')
 
@@ -71,4 +72,32 @@ module.exports = (app) => {
   
   app.post('/addAppointment',
     AppointmentController.post)
+
+  app.delete('/deleteAppointment/:appointmentId',
+    AppointmentController.delete)
+
+  app.get('/messages/:userId',
+    MessageController.index)
+
+  app.get('/supervisors',
+    UserController.showSupervisors)
+
+  app.get('/allResults',
+    ResultsController.show)
+
+  app.get('/patientsForReports',
+    UserController.showPatients)
+
+  app.get('/trialsForReports',
+    TrialsController.show)
+
+  app.delete('/deletePatient/:patientId',
+    UserController.delete)
+
+  app.delete('/deleteTrial/:trialId',
+    TrialsController.delete)
+
+  app.post('/addTrial',
+    TrialsController.post)
+
 }

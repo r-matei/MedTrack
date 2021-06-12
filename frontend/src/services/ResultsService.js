@@ -6,6 +6,12 @@ export default {
     return Api().get('patientResults')
   },
 
+  // get all results
+  show () {
+    return Api().get('allResults')
+  },
+
+  // add results
   post (results) {
     return Api().post('addResults', results)
   }

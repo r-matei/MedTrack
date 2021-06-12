@@ -1,38 +1,41 @@
 <template>
-  <v-row justify="center" align="center" fill-height class="ma-0 pa-0">
-    <v-col cols="4" class="pa-0 ma-0">
+  <v-row justify="center" align="center" fill-height class="ma-0">
+    <v-col cols="4" class="pa-0">
       <v-card color="#76C6D1" height="101vh" dark class="ma-0 pa-0">
-        <v-row class="fill-height" justify="center" align="center">
-          <v-col cols="12" sm="6" align-self="center" class="ma-0 pa-0">
-            <v-card-title class="text-h4 font-weight-medium">
-              There you go!
-            </v-card-title>
-          </v-col>
+        <v-row justify="center">
+          <v-img contain class="img-size my-10" :src="img.url" :alt="img.alt"></v-img>
+        </v-row>
+        <v-row justify="center" class="mt-10 mb-7">
+          <v-card-title class="text-h4 font-weight-medium">
+            Clinical Trials
+          </v-card-title>
+          <v-card-text class="mx-15">
+            "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+          </v-card-text>
         </v-row>
       </v-card>
     </v-col>
-    <v-col cols="8" class="px-7 py-0" align-self="start">
-      <p class="text-h4 font-weight-medium ma-16">Here is a list of tests you can attend to:</p>
-      <div v-for="item in selectedTrials" :key="item" class="ml-16 d-flex">
-        <v-checkbox
-          v-model="item.check"
-        >
-          <div slot='label'>{{item.title}} - <a :href="item.link">read more</a></div>
-        </v-checkbox>
+    <v-col cols="8" class="px-7 py-0">
+      <div v-for="trial in trials" :key="trial.id">
+        <v-row class="trial-box scroll-y">
+          <v-col cols="8" class="pt-4">
+            <p class="trial-title">{{ trial.title }}</p>
+            <p class="trial-description">{{ trial.description }}</p>
+          </v-col>
+          <v-col cols="4" class="pt-10">
+            <v-btn
+              color="#76C6D1"
+              dark
+              block
+              :to="{
+                  name: 'trial',
+                  params: {
+                    trialId: trial.id
+                  }
+                }">View trial details and register</v-btn>
+          </v-col>
+        </v-row>
       </div>
-      <div class="text-error" v-html="error"/>
-      <v-spacer></v-spacer>
-      <v-row class="bottom-page" no-gutters>
-        <v-col cols="10" align-start>
-        </v-col>
-        <v-spacer></v-spacer>
-        <v-col cols="2" align-end>
-          <v-btn color="#76C6D1" dark block
-            @click.prevent="submit()">
-            Submit
-          </v-btn>
-        </v-col>
-      </v-row>
     </v-col>
   </v-row>
 </template>
@@ -45,65 +48,34 @@ export default {
   data () {
     return {
       trials: [],
-      selectedTrials: [],
-      user: {},
-      checkTrial: false,
-      error: null
+      img: {
+        url: require('../../assets/illustration-1.png'),
+        name: 'illustration'
+      },
+      user: {}
     }
   },
+
   async mounted () {
     try {
       this.user = (await UserService.show()).data
+      console.log(this.user)
     } catch (err) {
       console.log(err)
     }
 
     try {
       this.trials = (await TrialsService.show()).data
-      this.selectedTrials = this.trials.map(trial => {
-        let props = {
-          'id': trial.id,
-          'title': trial.title,
-          'supervisorId': trial.supervisorId,
-          'link': trial.link,
-          'check': false
-        }
-        return props
-      })
     } catch (err) {
       console.log(err)
     }
   },
   methods: {
-    async submit () {
-      this.error = null
-
-      this.selectedTrials.forEach(element => {
-        if (element.check === true) {
-          this.user.clinicalTrialId = element.id
-          this.user.supervisorId = element.supervisorId
-          this.checkTrial = true
-        }
-      })
-
-      if (this.checkTrial === false) {
-        this.error = 'Please choose a trial to attend'
-        return
-      }
-
-      try {
-        await UserService.put(this.user)
-        this.$router.push('/survey')
-      } catch (err) {
-        console.log(err)
-      }
-    }
   }
 }
 </script>
 
 <style scoped>
-
 .img-size {
   height: 30vh;
 }
@@ -112,12 +84,32 @@ export default {
   margin-top: 45vh;
 }
 
-.text-error {
-  color: red;
-}
-
 .fixed {
   position: fixed;
+}
+
+.trial-title {
+  font-size: 2vh;
+  color: #76C6D1;
+}
+
+.trial-box {
+  border: 1px solid rgb(226, 226, 226);
+  margin: 15px 10px;
+}
+
+.align-center {
+  vertical-align: center;
+}
+
+.scroll-y {
+  overflow-y: auto;
+  overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
+}
+
+::-webkit-scrollbar {
+  display: none;
 }
 
 </style>

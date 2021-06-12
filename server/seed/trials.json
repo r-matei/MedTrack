@@ -1,29 +1,32 @@
 [
   {
-    "title": "Trial #1",
+    "title": "Healthy male and female volunteers aged 18 to 65 (C20017) Cohort A7",
     "phase": "I",
-    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+    "description": "We are conducting a clinical trial for a potential new medicine that could be used to treat patients with non-alcoholic steatohepatitis (NASH) which is a form of non-alcoholic fatty liver disease. In this trial, we are asking healthy male and female volunteers aged 18 to 65 years to test the investigational medicine so we can see how well tolerated the medicine is and how long it stays in your body.",
     "adverseEffects": "somnolenta, dureri de cap, stare de voma",
     "supervisorId": "3",
     "status": "active",
-    "link": "fhghfhgfhghgfh.com"
+    "link": "fhghfhgfhghgfh.com",
+    "requirements": "# This clinical trial will involve you staying with us for a few days (see below) at our private clinical research unit in London Bridge # You will need to attend a screening appointment so we can check if you are suitable to take part in the trial. At this appointment we perform a number of tests including, taking blood, checking your heart, and carrying out a physical examination to see if you will be OK to take part in the clinical trial. # If results from your screening appointment show you are suitable for the trial, you will be invited to take part. # This will involve a stay of 4 days / 3 nights in our clinical research unit. # After your stay with us you will be required to return for further appointments on Day 15, Day 29, Day 43, Day 57 and Day 85 of the trial. This means the whole trial takes approximately 5 and a half months from your screening visit through to your final visit. # In total, if you are included in the clinical trial you will come to the research unit 7 times. # During your stay with us you will receive a single dose of the investigational medicine subcutaneously (i.e. injection just under the skin) and we will conduct a number of assessments (like those we did at screening) to check how well you tolerate the new medicine and to help us understand how long it takes for your body to get rid of the new medicine."
   },
   {
-    "title": "Trial #2",
-    "phase": "I",
-    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+    "title": "Healthy male and female Vype e-Pen3 or e-Pod users aged between 19 to 55 (C20034) Group A",
+    "phase": "II",
+    "description": "The aim of this clinical trial is to compare ‘health effect indicators’ (biomarkers) in healthy adult volunteers who use Vype e-Pen3 and/or e-Pods versus healthy adult volunteers who smoke and to compare these results with volunteers who have quit smoking and those who have never smoked. The trial will involve you staying with us for a couple of days (see below) at our private medical facility in London Bridge.During your stay, we will conduct safety assessments and collect blood and urine samples to assess ‘health effect indicators’.",
     "adverseEffects": "somnolenta, dureri de cap, stare de voma",
     "supervisorId": "3",
     "status": "active",
-    "link": "fhghfhgfhghgfh.com"
+    "link": "fhghfhgfhghgfh.com",
+    "requirements": "# You will need to attend a screening appointment so we can check if you are suitable to take part in the trial. At this appointment we perform a number of tests including, taking blood, checking your heart, and carrying out a physical examination to see if you will be OK to take part in the clinical trial. We will have all of the information we need on the day of the screening to determine if you would be suitable to take part in the study. # If you are assessed as being suitable and wish to carry on into the study, you would stay with us for a further 24-36hrs from the time of your screening appointment. This means your time commitment will be of approximately 2 days / 1 night in our clinical research unit from the time of screening to the end of the in-house part of the trial. # By running the study in this way, it means you only have to make one combined visit to the unit for screening and the study itself. # During your stay with us, we will conduct a number of assessments including blood and urine samples to assess ‘health effect indicators’ between the groups. # Once you leave the clinical research unit, you will receive a follow-up phone call within 7 days after being discharged for a final telephone discussion with a doctor."
   },
   {
-    "title": "Trial #3",
-    "phase": "I",
-    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+    "title": "High blood pressure patients aged 18-65 (C18038) Part D Cohort 1",
+    "phase": "III",
+    "description": "We invite you to consider participating in a clinical trial of an investigational drug (ALN-AGT01) being developed for the treatment of high blood pressure. The main purpose of this clinical trial is to evaluate the safety and tolerability of the investigational drug in adults with high blood pressure. In addition, this clinical trial will evaluate how the body processes the investigational drug and its effect on the body. The information gathered during this clinical trial may be used to support further drug development, including larger trials in patients with high blood pressure.",
     "adverseEffects": "somnolenta, dureri de cap, stare de voma",
-    "supervisorId": "3",
-    "status": "finished",
-    "link": "fhghfhgfhghgfh.com"
+    "supervisorId": "5",
+    "status": "active",
+    "link": "fhghfhgfhghgfh.com",
+    "requirements": "# Screening visit: To determine your eligibility to participate, you would attend a screening appointment. # Treatment period: If you are eligible for trial participation, then you will have 2 in-house stays of 3 days / 2 nights each. You will receive 1 dose of the trial drug at each in-house stay. # Follow-Up period: You will be required to attend 15 follow-up visits (every week) over a period of 3 months after receiving the trial drug. You may be required to attend additional follow-up visits every 84 days if deemed necessary by the Research Doctor. During this time, female participants will also be seen every 30 days to test for pregnancy."
   }
 ]

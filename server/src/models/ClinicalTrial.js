@@ -6,7 +6,8 @@ module.exports = (sequelize, DataTypes) => {
     adverseEffects: DataTypes.STRING,
     supervisorId: DataTypes.NUMBER,
     status: DataTypes.STRING,
-    link: DataTypes.STRING
+    link: DataTypes.STRING,
+    requirements: DataTypes.TEXT
   })
 
   return ClinicalTrial

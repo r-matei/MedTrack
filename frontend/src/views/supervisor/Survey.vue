@@ -148,7 +148,16 @@
                     label="Zipcode"></v-text-field>
                 </v-col>
               </v-row>
+              <v-select
+                v-model="trialName"
+                :items="trialsName"
+                label="Clinical Trial Supervisor"
+                dense
+                required
+                :rules="[required]"
+              ></v-select>
             </v-card>
+            <div class="text-error align-end-error" v-html="error"/>
             <v-row no-gutters>
               <v-col cols="2" align-start>
                 <v-btn
@@ -176,10 +185,13 @@
 <script>
 import {mapState} from 'vuex'
 import UserService from '../../services/UserService'
+import TrialsService from '../../services/TrialsService'
 
 export default {
   data () {
     return {
+      trials: [],
+      trialsName: [],
       loadImg: {
         url: require('../../assets/load.png')
       },
@@ -190,8 +202,9 @@ export default {
       user: {},
       agree: false,
       countryName: true,
-      errorInfo: null,
-      required: (value) => !!value || 'Required.'
+      error: null,
+      required: (value) => !!value || 'Required.',
+      trialName: []
     }
   },
   async mounted () {
@@ -199,6 +212,16 @@ export default {
       this.user = (await UserService.show()).data
     } catch (err) {
       console.log(err)
+    }
+
+    try {
+      this.trials = (await TrialsService.show()).data
+    } catch (err) {
+      console.log(err)
+    }
+
+    for (var i = 0; i < this.trials.length; i++) {
+      this.trialsName.push(this.trials[i].title)
     }
   },
   computed: {
@@ -238,12 +261,31 @@ export default {
       this.color = '#f4f5f5'
     },
     async upload () {
-      this.errorInfo = null
+      this.error = null
       this.user.type = 'supervisor'
-      // if (this.user.) {
-      //   this.errorInfo = 'Please fill in all the required fields'
-      //   return
-      // }
+
+      if (this.files.length === 0) {
+        this.error = 'Please load an image of yourself'
+        return
+      }
+
+      for (var i = 0; i < this.trials.length; i++) {
+        if (this.trialName === this.trials[i].title) {
+          this.user.clinicalTrialId = this.trials[i].id
+        }
+      }
+
+      if (this.user.phoneNumber === '' ||
+          this.user.birthDate === '' ||
+          this.user.state === '' ||
+          this.user.city === '' ||
+          this.user.street === '' ||
+          this.user.zipcode === '' ||
+          this.user.clinicalTrialId === '') {
+        this.error = 'Please fill in all the required fields'
+        return
+      }
+
       try {
         await UserService.put(this.user)
         this.$router.push('/supervisor/supervisor-home')
@@ -308,6 +350,16 @@ ul {
 .align-end {
   position: absolute;
   right: 10vh;
+}
+
+.text-error {
+  color: red;
+}
+
+.align-end-error {
+  position: absolute;
+  right: 3vh;
+  bottom: 7vh;
 }
 
 </style>

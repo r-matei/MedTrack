@@ -145,13 +145,42 @@
               </v-row>
             </v-card>
           </v-col>
-          <!-- next appointment -->
+          <!-- all appointments -->
           <v-col cols="4">
             <v-card width="40vh" height="65vh" class="rounded-xl mt-10 mx-10" elevation="2">
               <v-card-title>
                 <v-icon large>mdi-calendar-check</v-icon>
-                <p class="text-h5 font-weight-bold text-color ma-2">Next appointment</p>
+                <p class="text-h5 font-weight-bold text-color ma-2">All appointments</p>
               </v-card-title>
+              <v-card
+                class="scroll-y"
+                height="45vh"
+                elevation="0"
+                >
+                <v-row v-for="pair in pairs" :key="pair">
+                  <v-list-item two-line class="mx-5 mt-5">
+                      <v-list-item-avatar>
+                        <v-img :src="require('../../assets/Pictures/' + pair.patient.img)"></v-img>
+                      </v-list-item-avatar>
+
+                      <v-list-item-content>
+                        <v-list-item-title class="font-weight-bold text-subtitle-1">{{ pair.patient.firstName }} {{ pair.patient.lastName }}</v-list-item-title>
+                        <v-list-item-subtitle class="text-size">{{ pair.date }} - {{ pair.time }}</v-list-item-subtitle>
+                      </v-list-item-content>
+                      <v-btn
+                        elevation="0"
+                        width="3vh"
+                        height="3vh"
+                        class="mx-2"
+                        fab
+                        color="#ffffff"
+                        small
+                        @click="(deleteAppId = pair.id) && (deleteAppTab = true)">
+                        <v-icon small>mdi-close</v-icon>
+                      </v-btn>
+                    </v-list-item>
+                </v-row>
+              </v-card>
               <v-row justify="center">
                 <v-col>
                   <v-row justify="center">
@@ -283,6 +312,39 @@
                   </v-btn>
               </v-card>
             </v-overlay>
+            <v-overlay
+              :z-index="zIndex"
+              :value="deleteAppTab">
+              <v-card
+                height="30vh"
+                width="60vh"
+                color="white"
+                align="center"
+                class="pt-15"
+                >
+                  <p class="tab-text">Are you sure you want to delete this appointment?</p>
+                  <v-btn
+                    color="#76C6D1"
+                    dark
+                    absolute
+                    left
+                    align-center
+                    class="mx-15 my-4"
+                    @click="deleteAppointment(deleteAppId)">
+                    Yes
+                  </v-btn>
+                  <v-btn
+                    color="#76C6D1"
+                    dark
+                    absolute
+                    right
+                    align-center
+                    class="mx-15 my-4"
+                    @click="deleteAppTab = false">
+                    No
+                  </v-btn>
+              </v-card>
+            </v-overlay>
           </v-col>
         </v-row>
       </v-card>
@@ -303,6 +365,7 @@ export default {
         month: 'Month',
         week: 'Week'
       },
+      selectedPatients: [], // pacientii cu care avem programari in saptamana curenta
       selectedEvent: {},
       menuTime: false,
       appTime: '',
@@ -323,7 +386,9 @@ export default {
         date: '',
         description: ''
       },
-      user: {}
+      user: {},
+      deleteAppTab: false,
+      deleteAppId: ''
     }
   },
   async mounted () {
@@ -337,7 +402,7 @@ export default {
     for (let i = 0; i < this.appointments.length; i++) {
       const allDay = 0
       const dt = new Date(this.appointments[i].date)
-      const hr = dt.getUTCHours() + 3
+      const hr = dt.getUTCHours()
       const minute = dt.getUTCMinutes()
       const first = new Date(dt - (dt % 900000))
       const second = new Date(first.getTime() + 3 * 900000)
@@ -355,10 +420,34 @@ export default {
     }
 
     this.events = events
+
+    // populeaza selectedPatients
+    for (let i = 0; i < this.appointments.length; i++) {
+      for (let j = 0; j < this.patients.length; j++) {
+        if (this.patients[j].supervisorId === this.user.id) {
+          let patientInfo = (({firstName, lastName, img, id}) => ({firstName, lastName, img, id}))(this.patients[j])
+          if (this.appointments[i].userId === this.patients[j].id) {
+            this.selectedPatients.push(patientInfo)
+          }
+        }
+      }
+    }
   },
   computed: {
     fromDateDisp () {
       return this.appDate
+    },
+    pairs () {
+      return this.selectedPatients.map((patient, i) => {
+        var d = new Date(this.appointments[i].date)
+
+        return {
+          id: this.appointments[i].id,
+          patient: patient,
+          date: d.toDateString(),
+          time: d.toLocaleTimeString(navigator.language, {hour: '2-digit', minute: '2-digit'})
+        }
+      })
     }
   },
   methods: {
@@ -432,6 +521,14 @@ export default {
       } catch (err) {
         console.log(err)
       }
+    },
+    async deleteAppointment () {
+      try {
+        await AppointmentService.delete(this.deleteAppId)
+        this.deleteAppTab = false
+      } catch (err) {
+        console.log(err)
+      }
     }
   }
 }
@@ -460,6 +557,21 @@ export default {
 
 .text-color {
   color:rgb(80, 80, 80);
+}
+
+.scroll-y {
+  overflow-y: auto;
+  overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
+}
+
+::-webkit-scrollbar {
+  display: none;
+}
+
+.tab-text {
+  color: #616161;
+  margin-bottom: 10vh;
 }
 
 </style>

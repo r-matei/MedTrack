@@ -14,5 +14,10 @@ export default {
   // add a new appointment
   post (appointment) {
     return Api().post('addAppointment', appointment)
+  },
+
+  // delete appointment
+  delete (appointmentId) {
+    return Api().delete(`deleteAppointment/${appointmentId}`)
   }
 }

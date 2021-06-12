@@ -1,0 +1,17 @@
+[
+  {
+    "userId": "1",
+    "message": "Hello Maria",
+    "to": "3"
+  },
+  {
+    "userId": "3",
+    "message": "Hello Gigel",
+    "to": "1"
+  },
+  {
+    "userId": "1",
+    "message": "Cf",
+    "to": "3"
+  }
+]

@@ -10,6 +10,8 @@ const io = require('socket.io')(http, {cors: {
   credentials: true
 }})
 
+const {Message} = require('./models')
+
 let users = [];
  
 app.use(morgan('combined'))
@@ -34,6 +36,12 @@ io.on("connection", (socket) => {
       const receiver = users.find((user) => user.id == data.to)
       if (receiver) {
         receiver.socket.emit('chat-message', (data));
+      }
+      try {
+        Message.create(data)
+        console.log("message created")
+      } catch (err) {
+        console.log(err)
       }
     })
 

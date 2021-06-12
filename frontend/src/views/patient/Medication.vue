@@ -57,17 +57,6 @@
                   </template>
                 </v-simple-table>
               </row>
-              <v-row class="bottom">
-                <v-col></v-col>
-                <v-spacer></v-spacer>
-                <v-col align-end>
-                  <v-btn
-                    color="#76C6D1"
-                    dark>
-                    Request new recipe
-                  </v-btn>
-                </v-col>
-              </v-row>
             </v-card>
           </v-col>
           <!-- online chat -->
@@ -87,17 +76,18 @@
                   height="24vh"
                   elevation="0"
                   class="scroll-y"
+                  id="chat-card"
                   >
                   <v-row class="align-end fill-height">
                     <v-col class="pa-0 mr-7 mb-2">
                       <div class="my-2" v-for="message in messages" :key="message">
-                        <span v-if="message.type === 'send'" class="d-flex justify-end">
+                        <span v-if="parseInt(message.userId) === parseInt(username) && parseInt(message.to) === parseInt(supervisor.id)" class="d-flex justify-end">
                           {{message.message}}
                           <v-avatar size="3vh">
-                            <v-img :src="require('../../assets/Pictures/' + user.img)"></v-img>
+                            <v-img :src="require('../../assets/Pictures/' + loggedUser.img)"></v-img>
                           </v-avatar>
                         </span>
-                        <span v-if="message.type === 'receive'" class="ml-5">
+                        <span v-if="parseInt(message.to) === parseInt(username) && parseInt(message.userId) === parseInt(supervisor.id)" class="ml-5">
                           <v-avatar size="3vh">
                             <v-img :src="require('../../assets/Pictures/' + supervisor.img)"></v-img>
                           </v-avatar>
@@ -117,6 +107,7 @@
                     solo
                     v-model="newMessage"
                     dense
+                    @keyup.enter="send()"
                   ></v-text-field>
                   </v-col>
                   <v-col cols="1" class="pt-3 pl-0">
@@ -143,6 +134,8 @@ import TrialsService from '../../services/TrialsService'
 import MedicationService from '../../services/MedicationService'
 import UserService from '../../services/UserService'
 import {mapState} from 'vuex'
+import MessageService from '../../services/MessageService'
+
 import io from 'socket.io-client'
 var socket = io('http://localhost:8081')
 
@@ -167,7 +160,8 @@ export default {
       // chat data
       newMessage: null,
       messages: [],
-      username: null
+      username: null,
+      loggedUser: {}
     }
   },
   computed: {
@@ -180,18 +174,26 @@ export default {
     socket.on('chat-message', (data) => {
       this.messages.push({
         message: data.message,
-        user: data.user,
-        type: 'receive',
+        userId: data.userId,
         to: data.to
       })
     })
   },
+  updated () {
+    setTimeout(() => {
+      let elem = document.getElementById('chat-card')
+      elem.scrollTop = elem.scrollHeight
+    })
+  },
   async mounted () {
     this.clinicalTrial = (await TrialsService.index()).data
-
+    this.loggedUser = (await UserService.showUser(this.user.id)).data
     this.medication = (await MedicationService.index()).data
+    console.log(this.medication)
+    this.supervisor = (await UserService.showUser(this.loggedUser.supervisorId)).data
 
-    this.supervisor = (await UserService.showUser(this.clinicalTrial.supervisorId)).data
+    // populeaza messages
+    this.messages = (await MessageService.index(this.user.id)).data
 
     // emit 'joined' event to server
     this.username = this.user.id
@@ -202,14 +204,12 @@ export default {
       this.messages.push({
         message: this.newMessage,
         userId: this.username,
-        type: 'send',
         to: this.supervisor.id
       })
 
       socket.emit('chat-message', {
         message: this.newMessage,
-        user: this.username,
-        type: 'send',
+        userId: this.username,
         to: this.supervisor.id
       })
       this.newMessage = null

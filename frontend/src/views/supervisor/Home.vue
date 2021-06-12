@@ -107,21 +107,22 @@
                   height="24vh"
                   elevation="0"
                   class="scroll-y"
+                  id="chat-card"
                   >
                   <v-row class="align-end fill-height">
                     <v-col class="pa-0">
                       <div class="my-2" v-for="message in messages" :key="message">
-                        <span v-if="message.type === 'send' && message.to === chatPatients[indexChatPatient].id" class="d-flex justify-end mr-5">
+                        <span v-if="parseInt(message.userId) === parseInt(username) && parseInt(message.to) === parseInt(chatPatients[indexChatPatient].id)" class="d-flex justify-end mr-5 my-3">
                           {{message.message}}
                           <v-avatar size="3vh">
                             <v-img :src="require('../../assets/Pictures/' + user.img)"></v-img>
                           </v-avatar>
                         </span>
-                        <span v-if="message.type === 'receive' && message.user === chatPatients[indexChatPatient].id" class="ml-5">
-                          {{message.message}}
+                        <span v-if="parseInt(message.to) === parseInt(username) && parseInt(message.userId) === parseInt(chatPatients[indexChatPatient].id)" class="ma-5 my-3">
                           <v-avatar size="3vh">
                             <v-img :src="require('../../assets/Pictures/' + chatPatients[indexChatPatient].img)"></v-img>
                           </v-avatar>
+                          {{message.message}}
                         </span>
                       </div>
                     </v-col>
@@ -137,6 +138,7 @@
                     solo
                     v-model="newMessage"
                     dense
+                    @keyup.enter="send()"
                   ></v-text-field>
                   </v-col>
                   <v-col cols="1" class="pt-3 pl-0">
@@ -274,6 +276,7 @@ import UserService from '../../services/UserService'
 import AppointmentService from '../../services/AppointmentService'
 import TrialsService from '../../services/TrialsService'
 import ReportsService from '../../services/ReportsService'
+import MessageService from '../../services/MessageService'
 
 import io from 'socket.io-client'
 var socket = io('http://localhost:8081')
@@ -316,8 +319,7 @@ export default {
     socket.on('chat-message', (data) => {
       this.messages.push({
         message: data.message,
-        user: data.user,
-        type: 'receive',
+        userId: data.userId,
         to: data.to
       })
     })
@@ -341,7 +343,6 @@ export default {
   },
   async mounted () {
     this.user = (await UserService.show()).data
-
     this.appointments = (await AppointmentService.show()).data
     this.patients = (await UserService.showPatients()).data
     this.trials = (await TrialsService.show()).data
@@ -380,23 +381,32 @@ export default {
         }
       }
     }
+
     // emit 'joined' event to server
     this.username = this.user.id
     socket.emit('joined', this.username)
+
+    // populeaza messages
+    this.messages = (await MessageService.index(this.user.id)).data
+    console.log(this.messages)
+  },
+  updated () {
+    setTimeout(() => {
+      let elem = document.getElementById('chat-card')
+      elem.scrollTop = elem.scrollHeight
+    })
   },
   methods: {
     send () {
       this.messages.push({
         message: this.newMessage,
         userId: this.username,
-        type: 'send',
         to: this.chatPatients[this.indexChatPatient].id
       })
 
       socket.emit('chat-message', {
         message: this.newMessage,
-        user: this.username,
-        type: 'send',
+        userId: this.username,
         to: this.chatPatients[this.indexChatPatient].id
       })
       this.newMessage = null
@@ -491,4 +501,5 @@ export default {
   left: 2px;
   bottom: 3px;
 }
+
 </style>

@@ -55,6 +55,7 @@
                                 <br>
                                 <v-col cols="12" class="px-0">
                                     <v-btn x-large block
+                                      @keyup.enter="login"
                                       type="submit"
                                       color="#76C6D1"
                                       class="mt-5 white-text"
@@ -127,6 +128,7 @@
                                     <div class="text-error" v-html="errorRegister"/>
                                     <br>
                                     <v-btn x-large block
+                                      @keyup.enter="register"
                                       type="submit"
                                       color="#76C6D1"
                                       class="mt-5 white-text"
@@ -206,7 +208,7 @@ export default {
         this.$store.dispatch('setUserToken', response.data.token)
         this.$store.dispatch('setUser', response.data.user)
         this.$router.push({
-          name: 'questionnaire'
+          name: 'clinical-trials'
         })
       } catch (error) {
         this.errorRegister = error.response.data.error

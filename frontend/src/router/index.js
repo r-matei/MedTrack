@@ -7,7 +7,7 @@ import Patient from '../views/patient/Patient.vue'
 import AppointmentsPatient from '../views/patient/Appoinments.vue'
 import MedicationPatient from '../views/patient/Medication.vue'
 import Register from '../views/patient/Register.vue'
-import Questionnaire from '../views/patient/Questionnaire.vue'
+import Trial from '../views/patient/Trial.vue'
 import ClinicalTrials from '../views/patient/ClinicalTrials.vue'
 import Survey from '../views/patient/Survey.vue'
 
@@ -21,6 +21,9 @@ import AppointmentsSupervisor from '../views/supervisor/Appointments.vue'
 import SurveySupervisor from '../views/supervisor/Survey.vue'
 import ViewTrial from '../views/supervisor/ViewTrial.vue'
 import ViewPatient from '../views/supervisor/ViewPatient.vue'
+
+// Reports
+import Reports from '../views/reports/Reports.vue'
 
 Vue.use(Router)
 
@@ -54,9 +57,9 @@ export default new Router({
       component: Register
     },
     {
-      path: '/questionnaire',
-      name: 'questionnaire',
-      component: Questionnaire
+      path: '/trial/:trialId',
+      name: 'trial',
+      component: Trial
     },
     {
       path: '/clinical-trials',
@@ -90,7 +93,7 @@ export default new Router({
         },
         {
           path: 'trials/:trialId',
-          name: 'trial',
+          name: 'clinical-trial',
           component: ViewTrial
         },
         {
@@ -118,6 +121,11 @@ export default new Router({
     {
       path: '*',
       redirect: 'register'
+    },
+    {
+      path: '/reports/clinical-trials',
+      name: 'Clinical Trials reports',
+      component: Reports
     }
   ]
 })

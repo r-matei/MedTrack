@@ -25,5 +25,15 @@ module.exports = {
         error: 'an error has occured trying to create this report'
       })
     }
-  }
+  },
+  async show (req, res) {
+    try {
+      const results = await Result.findAll()
+      res.send(results)
+    } catch (err) {
+      res.status(500).send({
+        error: 'an error has occured trying to show results'
+      })
+    }
+  },
 }

@@ -130,6 +130,16 @@
                 required
                 :rules="[required]"
               ></v-select>
+              <v-select
+                v-model="user.sex"
+                :items="genders"
+                menu-props="auto"
+                label="Gender"
+                hide-details
+                single-line
+                required
+                :rules="[required]"
+              ></v-select>
               <v-text-field
                 class="mt-3"
                 v-model="user.height"
@@ -217,7 +227,7 @@ Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod 
                 ></v-checkbox>
               </div>
             </v-card>
-
+            <div class="text-error align-end-error" v-html="error"/>
             <v-row no-gutters>
               <v-col cols="2" align-start>
                 <v-btn
@@ -260,14 +270,23 @@ export default {
       bloodTypes: ['A-', 'A+', 'B-', 'B+', 'AB-', 'AB+'],
       agree: false,
       countryName: true,
-      errorAgree: null,
-      errorInfo: null,
-      required: (value) => !!value || 'Required.'
+      error: null,
+      required: (value) => !!value || 'Required.',
+      genders: ['masculin', 'feminin'],
+      supervisors: [],
+      selectedSupervisors: []
     }
   },
   async mounted () {
     try {
       this.user = (await UserService.show()).data
+    } catch (err) {
+      console.log(err)
+    }
+
+    try {
+      this.supervisors = (await UserService.showSupervisors()).data
+      console.log(this.supervisors)
     } catch (err) {
       console.log(err)
     }
@@ -309,18 +328,43 @@ export default {
       this.color = '#f4f5f5'
     },
     async upload () {
-      this.errorInfo = null
-      this.errorAgree = null
+      this.error = null
 
       if (this.agree !== true) {
-        this.errorAgree = 'Please agree with our terms and conditions'
+        this.error = 'Please agree with our terms and conditions'
         return
       }
+
+      if (this.files.length === 0) {
+        this.error = 'Please load an image of yourself'
+        return
+      }
+
+      if (this.user.phoneNumber === '' ||
+          this.user.birthDate === '' ||
+          this.user.bloodType === '' ||
+          this.user.height === '' ||
+          this.user.weight === '' ||
+          this.user.state === '' ||
+          this.user.city === '' ||
+          this.user.street === '' ||
+          this.user.zipcode === '' ||
+          this.user.sex === '') {
+        this.error = 'Please fill in all the required fields'
+        return
+      }
+
+      for (var i = 0; i < this.supervisors.length; i++) {
+        if (this.supervisors[i].clinicalTrialId === this.user.clinicalTrialId) {
+          this.selectedSupervisors.push(this.supervisors[i])
+        }
+      }
+
+      var supId = Math.floor((Math.random() * this.selectedSupervisors.length) + 0)
+
+      this.user.supervisorId = this.selectedSupervisors[supId].id
       this.user.type = 'patient'
-      // if (this.user.) {
-      //   this.errorInfo = 'Please fill in all the required fields'
-      //   return
-      // }
+
       try {
         await UserService.put(this.user)
         this.$router.push('/patient/home')
@@ -385,6 +429,17 @@ ul {
 .align-end {
   position: absolute;
   right: 10vh;
+  bottom: 5vh;
+}
+
+.text-error {
+  color: red;
+}
+
+.align-end-error {
+  position: absolute;
+  right: 3vh;
+  bottom: 7vh;
 }
 
 </style>

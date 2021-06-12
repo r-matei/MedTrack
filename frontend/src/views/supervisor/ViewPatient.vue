@@ -9,17 +9,25 @@
         outlined
         >
           <v-text class="pa-4 font-weight-bold text-h4">{{ patient.firstName }} {{ patient.lastName }}</v-text>
-          <v-btn
-            color="#76C6D1"
-            dark
-            absolute
-            right
-            align-center
-            class="mx-12"
-            @click="resultsTab = !resultsTab">
-            <v-icon>mdi-plus</v-icon>
-            Add results
-          </v-btn>
+          <div style="display: inline; position: absolute; right: 20px;">
+            <v-btn
+              color="#76C6D1"
+              dark
+              align-center
+              class="justify-end"
+              @click="deleteTab = true">
+              Delete patient
+            </v-btn>
+            <v-btn
+              color="#76C6D1"
+              dark
+              align-center
+              class="mx-5 justify-end"
+              @click="resultsTab = !resultsTab">
+              <v-icon>mdi-plus</v-icon>
+              Add results
+            </v-btn>
+          </div>
           <br>
           <v-text class="pa-4 font-weight-regular text-h7">Clinical Trial: {{ trial.title }}</v-text>
 
@@ -134,6 +142,39 @@
               </v-btn>
           </v-card>
         </v-overlay>
+        <v-overlay
+          :z-index="zIndex"
+          :value="deleteTab">
+          <v-card
+            height="30vh"
+            width="60vh"
+            color="white"
+            align="center"
+            class="pt-15"
+            >
+              <p class="tab-text">Are you sure you want to delete this patient?</p>
+              <v-btn
+                color="#76C6D1"
+                dark
+                absolute
+                left
+                align-center
+                class="mx-15 my-4"
+                @click="deletePatient()">
+                Yes
+              </v-btn>
+              <v-btn
+                color="#76C6D1"
+                dark
+                absolute
+                right
+                align-center
+                class="mx-15 my-4"
+                @click="deleteTab = false">
+                No
+              </v-btn>
+          </v-card>
+        </v-overlay>
       </v-row>
   </v-container>
 </template>
@@ -141,6 +182,8 @@
 <script>
 import UserService from '../../services/UserService'
 import ResultsService from '../../services/ResultsService'
+import TrialsService from '../../services/TrialsService'
+
 import {mapState} from 'vuex'
 
 export default {
@@ -157,7 +200,8 @@ export default {
         text: '',
         healthCoef: '',
         date: ''
-      }
+      },
+      deleteTab: false
     }
   },
   computed: {
@@ -168,6 +212,7 @@ export default {
   async mounted () {
     const patientId = this.route.params.patientId
     this.patient = (await UserService.showUser(patientId)).data
+    this.trial = (await TrialsService.showTrial(this.patient.clinicalTrialId)).data
 
     function calculateAge (birthday) {
       var d = new Date(birthday)
@@ -200,6 +245,14 @@ export default {
       } catch (err) {
         console.log(err)
       }
+    },
+    async deletePatient () {
+      try {
+        await UserService.delete(this.patient.id)
+        this.deleteTab = false
+      } catch (err) {
+        console.log(err)
+      }
     }
   }
 }
@@ -222,5 +275,10 @@ export default {
 
 .text-error {
   color: red;
+}
+
+.tab-text {
+  color: #616161;
+  margin-bottom: 10vh;
 }
 </style>

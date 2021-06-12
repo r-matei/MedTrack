@@ -45,6 +45,20 @@ module.exports = {
       })
     }
   },
+  async showSupervisors (req, res) {
+    try {
+      const user = await User.findAll({
+        where: {
+          type: 'supervisor'
+        }
+      })
+      res.send(user)
+    } catch (err) {
+      res.status(500).send({
+        error: 'an error has occured trying to show the supervisors'
+      })
+    }
+  },
   async showUser (req, res) {
     try {
       const user = await User.findByPk(req.params.userId)
@@ -52,6 +66,17 @@ module.exports = {
     } catch (err) {
       res.status(500).send({
         error: 'an error has occured trying to show the patient'
+      })
+    }
+  },
+  async delete (req, res) {
+    try {
+      const user = await User.findByPk(req.params.patientId)
+      await user.destroy()
+      res.send(user)
+    } catch (err) {
+      res.status(500).send({
+        error: 'an error has occured trying to delete this appointment'
       })
     }
   }

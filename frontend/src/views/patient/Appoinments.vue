@@ -152,6 +152,13 @@
               <v-card-title>
                 <v-icon large>mdi-calendar-check</v-icon>
                 <p class="text-h5 font-weight-bold text-color ma-2">Next appointment</p>
+                <div v-if="nextAppointment" class="d-block">
+                  <p class="font-weight-bold mt-3 text-color">{{ nextAppointment.name }}</p>
+                  <span class="text-subtitle">{{ nextAppointment.date }} - </span>
+                  <span>{{ nextAppointment.hour }}</span>
+                  <p>{{ nextAppointment.description }}</p>
+                </div>
+                <p v-if="!nextAppointment">Nu aveti programari viitoare.</p>
               </v-card-title>
             </v-card>
           </v-col>
@@ -178,7 +185,8 @@ export default {
       selectedOpen: false,
       events: [],
       colors: ['#76C6D1', '#00A73E', '#FF7D01'],
-      appointments: []
+      appointments: [],
+      nextAppointment: {}
     }
   },
   async mounted () {
@@ -209,7 +217,24 @@ export default {
     }
 
     this.events = events
+    this.appointments.sort((b, a) => new Date(b.date) - new Date(a.date))
+
+    // get next appointment
+    var today = new Date()
+    for (var i = 0; i < this.appointments.length; i++) {
+      var d = new Date(this.appointments[i].date)
+      if (d > today) {
+        var id = i
+        break
+      }
+    }
+    this.nextAppointment = this.appointments[id]
+
+    const date = new Date(this.nextAppointment.date)
+    this.nextAppointment['date'] = date.toDateString()
+    this.nextAppointment['hour'] = date.toLocaleTimeString(navigator.language, {hour: '2-digit', minute: '2-digit'})
   },
+
   methods: {
     getEventColor (event) {
       return event.color

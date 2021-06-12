@@ -9,7 +9,7 @@ module.exports = {
       if (userType === 'patient') {
         appointment = await Appointment.findAll({
           where: {
-            userid: userId
+            userId: userId
           }
         })
       } else if (userType === 'supervisor') {
@@ -42,7 +42,18 @@ module.exports = {
       res.send(appointment)
     } catch (err) {
       res.status(500).send({
-        error: 'an error has occured trying to create this report'
+        error: 'an error has occured trying to create this appointment'
+      })
+    }
+  },
+  async delete (req, res) {
+    try {
+      const appointment = await Appointment.findByPk(req.params.appointmentId)
+      await appointment.destroy()
+      res.send(appointment)
+    } catch (err) {
+      res.status(500).send({
+        error: 'an error has occured trying to delete this appointment'
       })
     }
   }

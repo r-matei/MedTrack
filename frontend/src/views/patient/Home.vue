@@ -21,15 +21,16 @@
         </v-row>
         <v-row class="ma-0" align="center" justify="center">
           <!-- health graphic -->
-          <v-col cols="6" class="pa-5">
-            <v-card width="52vh" height="45vh" class="rounded-xl ml-16" elevation="2">
+          <v-col cols="7" class="pa-5">
+            <v-card width="60vh" height="45vh" class="rounded-xl ml-16" elevation="2">
               <v-card-title>
                 <p class="text-h5 font-weight-bold text-color mx-2 mt-2 mb-0">Health Curve</p>
               </v-card-title>
               <div class="healthGraphic">
                 <v-sparkline
+                  :labels="labels"
                   :value="graphicValues"
-                  color="blue"
+                  color="grey"
                   line-width="2"
                   stroke-linecap="round"
                   padding="8"
@@ -37,13 +38,14 @@
                   :gradient="['#fd2d2d', '#fe8e79', '#ffc4a4', '#ffffff']"
                   gradient-direction="top"
                   fill
-                  height="150vh"
+                  height="130vh"
+                  class="mx-5"
                 ></v-sparkline>
               </div>
             </v-card>
           </v-col>
           <!-- reports documents -->
-          <v-col cols="6" class="pa-5">
+          <v-col cols="5" class="pa-5">
             <v-card width="52vh" height="45vh" class="rounded-xl" elevation="2">
               <v-card-title>
                 <p class="text-h5 font-weight-bold text-color mx-2 mt-2 mb-0">Health Report Documents</p>
@@ -168,7 +170,8 @@ export default {
       results: [],
       reports: [],
       clinicalTrial: {},
-      graphicValues: [0]
+      graphicValues: [0],
+      labels: []
     }
   },
   computed: {
@@ -183,6 +186,7 @@ export default {
     this.results = (await ResultsService.index()).data
     for (let i = 0; i < this.results.length; i++) {
       this.graphicValues.push(this.results[i].healthCoef)
+      this.labels.push(this.results[i].date)
     }
     this.reports = (await ReportsService.index()).data
 

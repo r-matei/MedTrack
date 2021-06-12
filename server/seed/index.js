@@ -5,7 +5,8 @@ const {
   Medication,
   Result,
   Report,
-  Appointment
+  Appointment,
+  Message
 } = require('../src/models')
 
 const Promise = require('bluebird')
@@ -15,6 +16,7 @@ const reports = require('./reports.json')
 const results = require('./results.json')
 const medications = require('./medications.json')
 const appointments = require('./appointments.json')
+const messages = require('./messages.json')
 
 sequelize.sync({force: true}) // {force: true} to delete all tables from database
   .then(async function () {
@@ -51,6 +53,12 @@ sequelize.sync({force: true}) // {force: true} to delete all tables from databas
     await Promise.all(
       appointments.map(appointment => {
         Appointment.create(appointment)
+      })
+    )
+
+    await Promise.all(
+      messages.map(message => {
+        Message.create(message)
       })
     )
   })

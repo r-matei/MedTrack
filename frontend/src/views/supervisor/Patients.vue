@@ -32,6 +32,7 @@
           <td>{{row.item.phoneNumber}}</td>
           <td>{{row.item.age}}</td>
           <td>{{row.item.city}}</td>
+          <td>{{row.item.clinicalTrialId}}</td>
           <td>
               <v-btn
                 elevation="1"
@@ -78,6 +79,7 @@ export default {
         { text: 'Phone', value: 'phoneNumber' },
         { text: 'Age', value: 'age' },
         { text: 'City', value: 'city' },
+        { text: 'Clinical Trial ID', value: 'trialId' },
         { text: 'Details', value: '' }
       ]
     }

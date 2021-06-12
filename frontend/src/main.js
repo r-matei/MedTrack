@@ -8,10 +8,6 @@ import '@mdi/font/css/materialdesignicons.css'
 import store from '@/store/store'
 import VueResource from 'vue-resource'
 import vueCountryRegionSelect from 'vue-country-region-select'
-// import {io} from 'socket.io-client'
-// import VueSocketIO from 'vue-socket.io'
-
-// export const SocketInstance = socketio('http://localhost:8081')
 
 Vue.config.productionTip = false
 
