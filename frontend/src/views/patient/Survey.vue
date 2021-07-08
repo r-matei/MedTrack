@@ -4,7 +4,7 @@
       <v-card color="#76C6D1" height="101vh" dark class="ma-0 pa-0">
         <v-row class="fill-height" justify="center" align="center">
           <v-card-title class="text-h4 font-weight-medium">
-            Survey
+            Formular date personale
           </v-card-title>
         </v-row>
       </v-card>
@@ -17,7 +17,7 @@
             step="1"
             color="#76C6D1"
           >
-            Load your photo
+            Încarcă o poză
           </v-stepper-step>
 
           <v-divider></v-divider>
@@ -27,13 +27,13 @@
             step="2"
             color="#76C6D1"
           >
-            Personal informations
+            Informații personale
           </v-stepper-step>
 
           <v-divider></v-divider>
 
           <v-stepper-step step="3" color="#76C6D1">
-            Terms and conditions
+            Termeni și condiții
           </v-stepper-step>
         </v-stepper-header>
 
@@ -53,16 +53,16 @@
                   :src="loadImg.url"
                   width="30vh"
                   class="my-4"></v-img>
-                  Drag file here to upload
+                  Plasează aici o poză pentru a încărca
                   <br>
-                  or
+                  sau
                   <div class="file-wrapper">
-                    <input type="file" name="file-input" @change="handleFileInput" > Select file
+                    <input type="file" name="file-input" @change="handleFileInput" > Selectează o poză de profil
                   </div>
                   <ul>
                     <li v-for="(file, index) in files" :key="index">
                       {{ file.name }} ({{ file.size }} b)
-                      <button @click="removeFile(index)" title="Remove">Remove</button>
+                      <button @click="removeFile(index)" title="Remove">Șterge</button>
                     </li>
                   </ul>
                 </div>
@@ -75,7 +75,7 @@
                   color="#76C6D1" dark block
                   @click="e1 = 2"
                 >
-                  Continue
+                  Continuă
                 </v-btn>
               </v-col>
             </v-row>
@@ -92,7 +92,7 @@
               <v-text-field
                 class="mt-3"
                 v-model="user.phoneNumber"
-                label="Phone"
+                label="Telefon"
                 required
                 :rules="[required]"></v-text-field>
               <v-menu
@@ -105,7 +105,7 @@
               >
                 <template v-slot:activator="{ on }">
                 <v-text-field
-                  label="Birth Date"
+                  label="Data nașterii"
                   readonly
                   :value="fromDateDisp"
                   v-on="on"
@@ -124,7 +124,7 @@
                 v-model="user.bloodType"
                 :items="bloodTypes"
                 menu-props="auto"
-                label="Blood Type"
+                label="Grupă sanguină"
                 hide-details
                 single-line
                 required
@@ -134,7 +134,7 @@
                 v-model="user.sex"
                 :items="genders"
                 menu-props="auto"
-                label="Gender"
+                label="Sex"
                 hide-details
                 single-line
                 required
@@ -143,14 +143,14 @@
               <v-text-field
                 class="mt-3"
                 v-model="user.height"
-                label="Height"
+                label="Înălțime"
                 suffix="cm"
                 required
                 :rules="[required]"></v-text-field>
               <v-text-field
                 class="mt-3"
                 v-model="user.weight"
-                label="Weight"
+                label="Greutate"
                 suffix="kg"
                 required
                 :rules="[required]"></v-text-field>
@@ -175,7 +175,7 @@
                     v-model="user.street"
                     required
                     :rules="[required]"
-                    label="Street"></v-text-field>
+                    label="Stradă"></v-text-field>
                 </v-col>
                 <v-col
                   cols="12"
@@ -185,7 +185,7 @@
                     v-model="user.zipcode"
                     required
                     :rules="[required]"
-                    label="Zipcode"></v-text-field>
+                    label="Cod poștal"></v-text-field>
                 </v-col>
               </v-row>
             </v-card>
@@ -195,14 +195,14 @@
                   color="#76C6D1" dark block
                   @click="e1 = 1"
                 >
-                  Back
+                  Înapoi
                 </v-btn>
               </v-col>
               <v-spacer></v-spacer>
               <v-col cols="2" align-end>
                 <v-btn color="#76C6D1" dark block
                   @click="e1 = 3">
-                  Continue
+                  Continuă
                 </v-btn>
               </v-col>
             </v-row>
@@ -216,14 +216,17 @@
               elevation="0"
               outlined
             >
-              <v-card-title>Terms and Conditions</v-card-title>
-              <v-card-text>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
-Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam
+              <v-card-title>Termeni și condiții</v-card-title>
+              <v-card-text>Studiile clinice stau la baza dezvoltării  unor noi medicamente, produse biologice și dispozitive medicale. Uneori, datele referitoate la siguranța și eficacitatea celor studiate nu se cunosc în totalitate de la începutul studiului.  Unele studii pot oferi participanților o siguranță în ceea ce privește beneficiile studiului, pe când altele nu.
+
+Majoritatea studiilor includ unele riscuri, dar care nu trebuie să fie mai mari decât riscurile medicației care deja există pe piață sau mai mari decât riscurile progresiei bolii. Studiile clinice în România sunt aprobate de Comisia Națională de Etică ceea ce înseamnă că riscurile participării la studiile clinice respective sunt minime și sunt rezonabile în raport cu beneficiile.
+
+Multe studii clinice cer participanților să facă anumite teste, proceduri suplimentare conform protocolului. Aceste cereri sunt descrise și în consimțământ. Un potențial participant trebuie să discute despre aceste aspecte atât cu echipa studiului clinic, dar și cu medicul său de familie.
               </v-card-text>
               <div class="align-end">
                 <v-checkbox
                   v-model="agree"
-                  label="I agree"
+                  label="Sunt de acord cu termenii și condițiile"
                 ></v-checkbox>
               </div>
             </v-card>
@@ -234,14 +237,14 @@ Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod 
                   color="#76C6D1" dark block
                   @click="e1 = 2"
                 >
-                  Back
+                  Înapoi
                 </v-btn>
               </v-col>
               <v-spacer></v-spacer>
               <v-col cols="2" align-end>
                 <v-btn color="#76C6D1" dark block
                   @click="upload">
-                  Finish
+                  Finalizare
                 </v-btn>
               </v-col>
             </v-row>
@@ -271,7 +274,7 @@ export default {
       agree: false,
       countryName: true,
       error: null,
-      required: (value) => !!value || 'Required.',
+      required: (value) => !!value || 'Obligatoriu.',
       genders: ['masculin', 'feminin'],
       supervisors: [],
       selectedSupervisors: []
@@ -331,12 +334,12 @@ export default {
       this.error = null
 
       if (this.agree !== true) {
-        this.error = 'Please agree with our terms and conditions'
+        this.error = 'Vă rugăm să acceptați termenii și condițiile.'
         return
       }
 
       if (this.files.length === 0) {
-        this.error = 'Please load an image of yourself'
+        this.error = 'Vă rugăm să încărcați o poză de profil.'
         return
       }
 
@@ -350,7 +353,7 @@ export default {
           this.user.street === '' ||
           this.user.zipcode === '' ||
           this.user.sex === '') {
-        this.error = 'Please fill in all the required fields'
+        this.error = 'Vă rugăm să completați toate câmpurile obligatorii.'
         return
       }
 
@@ -367,7 +370,7 @@ export default {
 
       try {
         await UserService.put(this.user)
-        this.$router.push('/patient/home')
+        this.$router.push('/pacient/acasa')
       } catch (err) {
         console.log(err)
       }

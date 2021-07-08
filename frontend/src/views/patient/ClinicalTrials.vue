@@ -1,5 +1,5 @@
 <template>
-  <v-row justify="center" align="center" fill-height class="ma-0">
+  <v-row justify="center" class="ma-0">
     <v-col cols="4" class="pa-0">
       <v-card color="#76C6D1" height="101vh" dark class="ma-0 pa-0">
         <v-row justify="center">
@@ -7,35 +7,38 @@
         </v-row>
         <v-row justify="center" class="mt-10 mb-7">
           <v-card-title class="text-h4 font-weight-medium">
-            Clinical Trials
+            Studii clinice active
           </v-card-title>
           <v-card-text class="mx-15">
-            "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+            Studiile clinice sunt proiecte de cercetare pe oameni care se înscriu voluntar, făcute pentru a răspunde la întrebări legate de efectele unui medicament, vaccin, alte terapii sau dacă o altă boală răspunde sau nu la tratamentul deja existent. Studiile clinice sunt proiecte în care oamenii pot participa atât în calitate de pacienți cât și de voluntari sănătoși.
           </v-card-text>
         </v-row>
       </v-card>
     </v-col>
-    <v-col cols="8" class="px-7 py-0">
-      <div v-for="trial in trials" :key="trial.id">
-        <v-row class="trial-box scroll-y">
-          <v-col cols="8" class="pt-4">
-            <p class="trial-title">{{ trial.title }}</p>
-            <p class="trial-description">{{ trial.description }}</p>
-          </v-col>
-          <v-col cols="4" class="pt-10">
-            <v-btn
-              color="#76C6D1"
-              dark
-              block
-              :to="{
-                  name: 'trial',
-                  params: {
-                    trialId: trial.id
-                  }
-                }">View trial details and register</v-btn>
-          </v-col>
-        </v-row>
-      </div>
+    <v-col cols="8" class="px-7 py-0" elevation="0">
+      <v-card class="set-height scroll-y">
+        <div v-for="trial in trials" :key="trial.id">
+          <v-row class="trial-box">
+            <v-col cols="8" class="pt-4">
+              <p class="trial-title">{{ trial.title }}</p>
+              <p class="trial-description">{{ trial.description }}</p>
+            </v-col>
+            <v-col cols="4" class="pt-10">
+              <v-btn
+                color="#76C6D1"
+                dark
+                block
+                class="pa-5"
+                :to="{
+                    name: 'trial',
+                    params: {
+                      trialId: trial.id
+                    }
+                  }">Vezi mai multe detalii și înregistrează-te</v-btn>
+            </v-col>
+          </v-row>
+        </div>
+      </v-card>
     </v-col>
   </v-row>
 </template>
@@ -110,6 +113,10 @@ export default {
 
 ::-webkit-scrollbar {
   display: none;
+}
+
+.set-height {
+  height: 100vh;
 }
 
 </style>

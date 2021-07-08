@@ -8,8 +8,8 @@
         class="bradius ma-0 pa-0">
         <v-row class="ma-0">
           <v-col cols="6" class="pa-5">
-            <p class="text-h5 font-weight-bold mt-16 mx-16">Welcome Jane Smith !</p>
-            <p class="text-subtitle1 font-weight-regular mx-16">Don't forget about your daily medication!</p>
+            <p class="text-h5 font-weight-bold mt-16 mx-16">Bine ai venit, {{user.firstName}} {{user.lastName}} !</p>
+            <p class="text-subtitle1 font-weight-regular mx-16">Nu uita de medicația ta zilnică!</p>
             <!-- efecte adverse -->
             <v-card width="35vh" height="20vh" class="mx-16 mt-16 pa-2 rounded-xl" align="center" elevation="2">
               <v-card-text class="font-weight-bold text-h6">Efecte adverse</v-card-text>
@@ -26,7 +26,7 @@
             <v-card width="70vh" height="45vh" class="rounded-xl ml-16" elevation="2">
               <v-card-title>
                 <img width="35vh" class="mx-2 mt-2 mb-6" :src="medImage.url" :alt="medImage.alt">
-                <p class="text-h5 font-weight-bold text-color mx-2 mt-2 mb-6">Medication</p>
+                <p class="text-h5 font-weight-bold text-color mx-2 mt-2 mb-6">Medicație</p>
               </v-card-title>
               <row align="center">
                 <v-simple-table>
@@ -34,13 +34,13 @@
                     <thead>
                       <tr>
                         <th class="text-center">
-                          Name
+                          Nume
                         </th>
                         <th class="text-center">
-                          Quantity
+                          Cantitate
                         </th>
                         <th class="text-center">
-                          Period
+                          Perioadă
                         </th>
                       </tr>
                     </thead>
@@ -64,7 +64,7 @@
             <v-card width="70vh" height="45vh" class="rounded-xl" elevation="2">
               <v-card-title>
                 <img width="35vh" class="ml-2" :src="chatImage.url" :alt="chatImage.alt">
-                <p class="text-h5 font-weight-bold text-color ma-2">Online chat</p>
+                <p class="text-h5 font-weight-bold text-color ma-2">Chat online</p>
               </v-card-title>
               <v-avatar class="ml-5 mt-0">
                 <v-img :src="require('../../assets/Pictures/' + supervisor.img)"></v-img>
@@ -189,7 +189,6 @@ export default {
     this.clinicalTrial = (await TrialsService.index()).data
     this.loggedUser = (await UserService.showUser(this.user.id)).data
     this.medication = (await MedicationService.index()).data
-    console.log(this.medication)
     this.supervisor = (await UserService.showUser(this.loggedUser.supervisorId)).data
 
     // populeaza messages

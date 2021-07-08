@@ -1,32 +1,62 @@
 [
   {
-    "title": "Healthy male and female volunteers aged 18 to 65 (C20017) Cohort A7",
+    "title": "Studiu cu privire la diabetul tip 2 (C19040) P2 C1",
     "phase": "I",
-    "description": "We are conducting a clinical trial for a potential new medicine that could be used to treat patients with non-alcoholic steatohepatitis (NASH) which is a form of non-alcoholic fatty liver disease. In this trial, we are asking healthy male and female volunteers aged 18 to 65 years to test the investigational medicine so we can see how well tolerated the medicine is and how long it stays in your body.",
-    "adverseEffects": "somnolenta, dureri de cap, stare de voma",
-    "supervisorId": "3",
-    "status": "active",
-    "link": "fhghfhgfhghgfh.com",
-    "requirements": "# This clinical trial will involve you staying with us for a few days (see below) at our private clinical research unit in London Bridge # You will need to attend a screening appointment so we can check if you are suitable to take part in the trial. At this appointment we perform a number of tests including, taking blood, checking your heart, and carrying out a physical examination to see if you will be OK to take part in the clinical trial. # If results from your screening appointment show you are suitable for the trial, you will be invited to take part. # This will involve a stay of 4 days / 3 nights in our clinical research unit. # After your stay with us you will be required to return for further appointments on Day 15, Day 29, Day 43, Day 57 and Day 85 of the trial. This means the whole trial takes approximately 5 and a half months from your screening visit through to your final visit. # In total, if you are included in the clinical trial you will come to the research unit 7 times. # During your stay with us you will receive a single dose of the investigational medicine subcutaneously (i.e. injection just under the skin) and we will conduct a number of assessments (like those we did at screening) to check how well you tolerate the new medicine and to help us understand how long it takes for your body to get rid of the new medicine."
-  },
-  {
-    "title": "Healthy male and female Vype e-Pen3 or e-Pod users aged between 19 to 55 (C20034) Group A",
-    "phase": "II",
-    "description": "The aim of this clinical trial is to compare ‘health effect indicators’ (biomarkers) in healthy adult volunteers who use Vype e-Pen3 and/or e-Pods versus healthy adult volunteers who smoke and to compare these results with volunteers who have quit smoking and those who have never smoked. The trial will involve you staying with us for a couple of days (see below) at our private medical facility in London Bridge.During your stay, we will conduct safety assessments and collect blood and urine samples to assess ‘health effect indicators’.",
-    "adverseEffects": "somnolenta, dureri de cap, stare de voma",
-    "supervisorId": "3",
-    "status": "active",
-    "link": "fhghfhgfhghgfh.com",
-    "requirements": "# You will need to attend a screening appointment so we can check if you are suitable to take part in the trial. At this appointment we perform a number of tests including, taking blood, checking your heart, and carrying out a physical examination to see if you will be OK to take part in the clinical trial. We will have all of the information we need on the day of the screening to determine if you would be suitable to take part in the study. # If you are assessed as being suitable and wish to carry on into the study, you would stay with us for a further 24-36hrs from the time of your screening appointment. This means your time commitment will be of approximately 2 days / 1 night in our clinical research unit from the time of screening to the end of the in-house part of the trial. # By running the study in this way, it means you only have to make one combined visit to the unit for screening and the study itself. # During your stay with us, we will conduct a number of assessments including blood and urine samples to assess ‘health effect indicators’ between the groups. # Once you leave the clinical research unit, you will receive a follow-up phone call within 7 days after being discharged for a final telephone discussion with a doctor."
-  },
-  {
-    "title": "High blood pressure patients aged 18-65 (C18038) Part D Cohort 1",
-    "phase": "III",
-    "description": "We invite you to consider participating in a clinical trial of an investigational drug (ALN-AGT01) being developed for the treatment of high blood pressure. The main purpose of this clinical trial is to evaluate the safety and tolerability of the investigational drug in adults with high blood pressure. In addition, this clinical trial will evaluate how the body processes the investigational drug and its effect on the body. The information gathered during this clinical trial may be used to support further drug development, including larger trials in patients with high blood pressure.",
-    "adverseEffects": "somnolenta, dureri de cap, stare de voma",
+    "description": "Căutăm bărbați și femei cu diabet zaharat de tip 2 cu vârste cuprinse între 18 și 65 de ani pentru a testa un medicament potențial (adică de investigație) pentru tratarea diabetului de tip 2.",
+    "adverseEffects": "somnolenta, dureri de cap",
     "supervisorId": "5",
     "status": "active",
-    "link": "fhghfhgfhghgfh.com",
-    "requirements": "# Screening visit: To determine your eligibility to participate, you would attend a screening appointment. # Treatment period: If you are eligible for trial participation, then you will have 2 in-house stays of 3 days / 2 nights each. You will receive 1 dose of the trial drug at each in-house stay. # Follow-Up period: You will be required to attend 15 follow-up visits (every week) over a period of 3 months after receiving the trial drug. You may be required to attend additional follow-up visits every 84 days if deemed necessary by the Research Doctor. During this time, female participants will also be seen every 30 days to test for pregnancy."
+    "link": "/supervizor/studii-supervizor/1",
+    "requirements": "# Medicina de investigație funcționează prin legarea anumitor hormoni care sunt produși după consumul unei mese, determinând scăderea nivelului de zahăr din sânge. # Scopul acestui studiu este de a determina cât de sigur și bine tolerat este medicamentul de investigație atunci când este administrat pacienților cu diabet de tip 2. # Va trebui să participați la o întâlnire de screening, astfel încât să putem stabili dacă sunteți potrivit pentru a participa la proces. # În timpul șederii dvs. la noi, veți primi mai multe doze de medicament de investigație, adică o dată pe zi, timp de 5 zile și vom efectua o serie de evaluări pentru a vă verifica siguranța și pentru a ne ajuta să înțelegem modul în care corpul dumneavoastră procesează medicamentul. # După șederea cu noi, vă veți întoarce pentru o vizită de urmărire la 7 zile după ce ați fost externat din unitate."
+  },
+  {
+    "title": "Studiu pentru dezvoltarea vaccinului împotriva bacteriei Neisseria meningitidis A, B, C, W și Y",
+    "phase": "II",
+    "description": "Vă invităm să luați parte la un proiect de screening (adică la un control general de sănătate) și la un proiect de vaccinare care oferă screening gratuit și vaccinări împotriva bacteriilor Neisseria meningitidis A, B, C, W și Y care pot provoca infecții grave și uneori care pun viața în pericol, inclusiv meningită și sepsis (otrăvire cu sânge).",
+    "adverseEffects": "somnolenta, dureri de cap",
+    "supervisorId": "6",
+    "status": "active",
+    "link": "/supervizor/studii-supervizor/2",
+    "requirements": "# Bărbați și femele sănătoși cu vârste cuprinse între 18 și 45 de ani (inclusiv). # Trebuie să cântăriți între 50,0 - 100,0 kg (inclusiv) și să aveți un indice de masă corporală (IMC) în intervalul 18,0 - 25,0 kg / m² (inclusiv). # Nu trebuie să fumați mai mult de 10 țigări pe zi. # Nu trebuie să dați test pozitiv pentru alcool sau droguri sau să prezentați dovezi ale abuzului de droguri sau alcool. # Trebuie să fiți sănătos, fără afecțiuni medicale subiacente care pot interfera cu participarea la proiect și / sau vă pot pune în pericol. # Nu trebuie să fi donat mai mult de 400 ml de sânge cu 16 săptămâni înainte de Vizita 1."
+  },
+  {
+    "title": "Pacienți cu tensiune arterială crescută cu vârsta cuprinsă între 18 și 65 de ani (C18038) Partea D Cohorta 1",
+    "phase": "III",
+    "description": "Scopul principal al acestui studiu clinic este de a evalua siguranța și tolerabilitatea medicamentului de investigație la adulții cu tensiune arterială crescută. În plus, acest studiu clinic va evalua modul în care organismul procesează medicamentul de investigație și efectul acestuia asupra organismului. ",
+    "adverseEffects": "somnolenta, dureri de cap",
+    "supervisorId": "7",
+    "status": "active",
+    "link": "/supervizor/studii-supervizor/2",
+    "requirements": "# Bărbați și femele sănătoși cu vârste cuprinse între 18 și 45 de ani (inclusiv). # Trebuie să cântăriți între 50,0 - 100,0 kg (inclusiv) și să aveți un indice de masă corporală (IMC) în intervalul 18,0 - 25,0 kg / m² (inclusiv). # Nu trebuie să fumați mai mult de 10 țigări pe zi. # Nu trebuie să dați test pozitiv pentru alcool sau droguri sau să prezentați dovezi ale abuzului de droguri sau alcool. # Trebuie să fiți sănătos, fără afecțiuni medicale subiacente care pot interfera cu participarea la proiect și / sau vă pot pune în pericol. # Nu trebuie să fi donat mai mult de 400 ml de sânge cu 16 săptămâni înainte de Vizita 1."
+  },
+  {
+    "title": "Pacienți cu boală Wilson cu vârsta de peste 18 ani (C19048)",
+    "phase": "II",
+    "description": "Căutăm bărbați și femei sănătoși cu vârste cuprinse între 18 și 65 de ani pentru a testa un medicament potențial (adică de investigație) pentru tratarea bolii Wilson.",
+    "adverseEffects": "somnolenta, dureri de cap",
+    "supervisorId": "8",
+    "status": "active",
+    "link": "/supervizor/studii-supervizor/2",
+    "requirements": "# Bărbați și femele sănătoși cu vârste cuprinse între 18 și 45 de ani (inclusiv). # Trebuie să cântăriți între 50,0 - 100,0 kg (inclusiv) și să aveți un indice de masă corporală (IMC) în intervalul 18,0 - 25,0 kg / m² (inclusiv). # Nu trebuie să fumați mai mult de 10 țigări pe zi. # Nu trebuie să dați test pozitiv pentru alcool sau droguri sau să prezentați dovezi ale abuzului de droguri sau alcool. # Trebuie să fiți sănătos, fără afecțiuni medicale subiacente care pot interfera cu participarea la proiect și / sau vă pot pune în pericol. # Nu trebuie să fi donat mai mult de 400 ml de sânge cu 16 săptămâni înainte de Vizita 1."
+  },
+  {
+    "title": "Pacienți cu Pemphigus Vulgaris (PV) cu vârste cuprinse între 18 și 70 de ani (C20028) Partea B",
+    "phase": "III",
+    "description": "În acest studiu, cerem pacienților diagnosticați cu PV cu vârsta cuprinsă între 18 și 70 de ani să testeze noul medicament, astfel încât să putem vedea cât de bine este tolerat medicamentul și cât de mult rămâne în corpul dumneavoastră.",
+    "adverseEffects": "somnolenta, dureri de cap",
+    "supervisorId": "9",
+    "status": "active",
+    "link": "/supervizor/studii-supervizor/2",
+    "requirements": "# Bărbați și femele sănătoși cu vârste cuprinse între 18 și 45 de ani (inclusiv). # Trebuie să cântăriți între 50,0 - 100,0 kg (inclusiv) și să aveți un indice de masă corporală (IMC) în intervalul 18,0 - 25,0 kg / m² (inclusiv). # Nu trebuie să fumați mai mult de 10 țigări pe zi. # Nu trebuie să dați test pozitiv pentru alcool sau droguri sau să prezentați dovezi ale abuzului de droguri sau alcool. # Trebuie să fiți sănătos, fără afecțiuni medicale subiacente care pot interfera cu participarea la proiect și / sau vă pot pune în pericol. # Nu trebuie să fi donat mai mult de 400 ml de sânge cu 16 săptămâni înainte de Vizita 1."
+  },
+  {
+    "title": "Utilizatori sănătoși Vype e-Pen3 sau e-Pod de sex masculin și feminin cu vârste cuprinse între 19 și 55 de ani (C20034) Grupa A",
+    "phase": "III",
+    "description": "Realizăm un studiu clinic, în numele British American Tobacco Ltd., la voluntari sănătoși, bărbați și femei, cu vârste cuprinse între 19 și 55 de ani, care sunt utilizatori Vype.",
+    "adverseEffects": "somnolenta, dureri de cap",
+    "supervisorId": "10",
+    "status": "active",
+    "link": "/supervizor/studii-supervizor/2",
+    "requirements": "# Bărbați și femele sănătoși cu vârste cuprinse între 18 și 45 de ani (inclusiv). # Trebuie să cântăriți între 50,0 - 100,0 kg (inclusiv) și să aveți un indice de masă corporală (IMC) în intervalul 18,0 - 25,0 kg / m² (inclusiv). # Nu trebuie să fumați mai mult de 10 țigări pe zi. # Nu trebuie să dați test pozitiv pentru alcool sau droguri sau să prezentați dovezi ale abuzului de droguri sau alcool. # Trebuie să fiți sănătos, fără afecțiuni medicale subiacente care pot interfera cu participarea la proiect și / sau vă pot pune în pericol. # Nu trebuie să fi donat mai mult de 400 ml de sânge cu 16 săptămâni înainte de Vizita 1."
   }
 ]

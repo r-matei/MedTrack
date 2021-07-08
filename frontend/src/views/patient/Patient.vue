@@ -38,7 +38,7 @@
                 text
                 class="my-4"
                 @click = "logout({name: 'register'})">
-                <v-icon medium class="mr-2 mb-1">mdi-logout-variant</v-icon>Logout
+                <v-icon medium class="mr-2 mb-1">mdi-logout-variant</v-icon>Deconectare
               </v-btn>
             </div>
           </template>
@@ -73,23 +73,23 @@
               text
               dark
               :to="{
-                path: '/register'
+                path: '/inregistrare'
               }">
-              Login
+              Conectare
             </v-btn>
 
             <v-btn
               text
               :to="{
-                path: '/register'
+                path: '/inregistrare'
               }">
-              Sign Up
+              Înregistrare
             </v-btn>
           </v-toolbar-items>
         </v-toolbar>
-        <v-text> This Content Isn't Available Right Now</v-text>
+        <v-text> Pentru a vedea conținutul acestei pagini trebuie să fiți conectat</v-text>
         <br>
-        <v-text>Please login first</v-text>
+        <v-text>Vă rugăm să vă înregistrați</v-text>
       </v-col>
     </v-row>
   </div>
@@ -105,9 +105,9 @@ export default {
         alt: 'Logo'
       },
       menu: [
-        { title: 'Home', icon: 'mdi-home-outline', link: '/patient/home' },
-        { title: 'Appointments', icon: 'mdi-calendar', link: '/patient/appointments' },
-        { title: 'Medication', icon: 'mdi-heart-outline', link: '/patient/medication' }
+        { title: 'Acasă', icon: 'mdi-home-outline', link: '/pacient/acasa' },
+        { title: 'Programări', icon: 'mdi-calendar', link: '/pacient/programari' },
+        { title: 'Medicație', icon: 'mdi-heart-outline', link: '/pacient/medicatie' }
       ]
     }
   },
@@ -122,7 +122,7 @@ export default {
       this.$store.dispatch('setUserToken', null)
       this.$store.dispatch('setUser', null)
       this.$router.push({
-        path: '/register'
+        path: '/inregistrare'
       })
     }
   }

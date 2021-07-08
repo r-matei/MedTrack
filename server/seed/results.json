@@ -2,23 +2,37 @@
   {
     "userId": "1",
     "date": "2021-03-21",
-    "title": "Results #1",
-    "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+    "title": "Rezultate analize inițiale",
+    "text": "În urma analizelor inițiale, vă conformați cerințelor acestui studiu și vom putea continua împreună. Pentru informații mai detaliate puteți vedea raportul cu analize inițiale din secțiunea rapoarte.",
     "healthCoef": "8"
   },
   {
     "userId": "1",
     "date": "2021-04-10",
-    "title": "Results #2",
-    "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+    "title": "Rezultate toxicologice",
+    "text": "Avand in vedere ca probele toxicologice au o implicatie medicolegala clara este necesar sa fie elaborate si implementate proceduri stricte referitoare la lantul de custodie. Proba trebuie securizata de catre personalul care realizeaza recoltarea astfel incat sa nu fie posibila nici inlocuirea probei si nici modificarea continutului, iar transferul de la o persoana la alta se va face pe baza de semnatura si cu precizarea momentului preluarii probei.",
     "healthCoef": "20"
   },
   {
     "userId": "1",
     "date": "2021-04-20",
-    "title": "Results #3",
+    "title": "Rezultate progres programare 15.07.2021",
     "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
     "healthCoef": "12"
+  },
+  {
+    "userId": "2",
+    "date": "2021-03-21",
+    "title": "Rezultate analize inițiale",
+    "text": "În urma analizelor inițiale, vă conformați cerințelor acestui studiu și vom putea continua împreună. Pentru informații mai detaliate puteți vedea raportul cu analize inițiale din secțiunea rapoarte.",
+    "healthCoef": "8"
+  },
+  {
+    "userId": "2",
+    "date": "2021-04-10",
+    "title": "Rezultate toxicologice",
+    "text": "Avand in vedere ca probele toxicologice au o implicatie medicolegala clara este necesar sa fie elaborate si implementate proceduri stricte referitoare la lantul de custodie. Proba trebuie securizata de catre personalul care realizeaza recoltarea astfel incat sa nu fie posibila nici inlocuirea probei si nici modificarea continutului, iar transferul de la o persoana la alta se va face pe baza de semnatura si cu precizarea momentului preluarii probei.",
+    "healthCoef": "20"
   },
   {
     "userId": "1",
@@ -28,14 +42,14 @@
     "healthCoef": "25"
   },
   {
-    "userId": "1",
+    "userId": "2",
     "date": "2021-03-21",
     "title": "Results #1",
     "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
     "healthCoef": "16"
   },
   {
-    "userId": "1",
+    "userId": "3",
     "date": "2021-03-21",
     "title": "Results #1",
     "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
@@ -49,7 +63,7 @@
     "healthCoef": "5"
   },
   {
-    "userId": "2",
+    "userId": "3",
     "date": "2021-04-10",
     "title": "Results #2",
     "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",

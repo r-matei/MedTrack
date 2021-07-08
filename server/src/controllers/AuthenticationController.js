@@ -20,7 +20,7 @@ module.exports = {
       })
     } catch (err) {
       res.status(400).send({
-        error: 'This email account is already in use.'
+        error: 'Acest email este deja folosit.'
       })
     }
   },
@@ -35,15 +35,15 @@ module.exports = {
       })
       if (!user) {
         res.status(403).send({
-          error: 'The login information was incorrect'
+          error: 'Datele de conectare nu sunt corecte'
         })
         return
       }
 
-      const isPasswordValid = user.comparePassword(password)
+      const isPasswordValid = await user.comparePassword(password)
       if (!isPasswordValid) {
         res.status(403).send({
-          error: 'The login information was incorrect'
+          error: 'Parola nu este corectă'
         })
         return
       }

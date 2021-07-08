@@ -8,8 +8,8 @@
         class="bradius ma-0 pa-0">
         <v-row class="ma-0">
           <v-col cols="12" class="pa-3">
-            <p class="text-h5 font-weight-bold mt-16 mx-16">Appointments schedule</p>
-            <p class="text-subtitle1 font-weight-regular mx-16 my-0">Contact your supervisor to change an appointment</p>
+            <p class="text-h5 font-weight-bold mt-16 mx-16">Calendar programări</p>
+            <p class="text-subtitle1 font-weight-regular mx-16 my-0">Pentru întrebări vă rugăm să contactați supervizorul dumneavoastră</p>
           </v-col>
         </v-row>
         <v-row class="ma-0">
@@ -28,7 +28,7 @@
                         color="grey darken-2"
                         @click="setToday"
                       >
-                        Today
+                        Astăzi
                       </v-btn>
                       <v-btn
                         fab
@@ -75,10 +75,10 @@
                         </template>
                         <v-list>
                           <v-list-item @click="type = 'week'">
-                            <v-list-item-title>Week</v-list-item-title>
+                            <v-list-item-title>Săptămână</v-list-item-title>
                           </v-list-item>
                           <v-list-item @click="type = 'month'">
-                            <v-list-item-title>Month</v-list-item-title>
+                            <v-list-item-title>Lună</v-list-item-title>
                           </v-list-item>
                         </v-list>
                       </v-menu>
@@ -136,7 +136,7 @@
                             color="secondary"
                             @click="selectedOpen = false"
                           >
-                            Cancel
+                            Închide
                           </v-btn>
                         </v-card-actions>
                       </v-card>
@@ -151,12 +151,12 @@
             <v-card width="40vh" height="65vh" class="rounded-xl mt-10 mx-10" elevation="2">
               <v-card-title>
                 <v-icon large>mdi-calendar-check</v-icon>
-                <p class="text-h5 font-weight-bold text-color ma-2">Next appointment</p>
+                <p class="text-h5 font-weight-bold text-color ma-2">Următoarea programare</p>
                 <div v-if="nextAppointment" class="d-block">
                   <p class="font-weight-bold mt-3 text-color">{{ nextAppointment.name }}</p>
                   <span class="text-subtitle">{{ nextAppointment.date }} - </span>
                   <span>{{ nextAppointment.hour }}</span>
-                  <p>{{ nextAppointment.description }}</p>
+                  <p class="app-description">{{ nextAppointment.description }}</p>
                 </div>
                 <p v-if="!nextAppointment">Nu aveti programari viitoare.</p>
               </v-card-title>
@@ -177,8 +177,8 @@ export default {
       focus: '',
       type: 'month',
       typeToLabel: {
-        month: 'Month',
-        week: 'Week'
+        month: 'Lună',
+        week: 'Săptămână'
       },
       selectedEvent: {},
       selectedElement: null,
@@ -199,7 +199,7 @@ export default {
     for (let i = 0; i < this.appointments.length; i++) {
       const allDay = 0
       const dt = new Date(this.appointments[i].date)
-      const hr = dt.getUTCHours() + 3
+      const hr = dt.getUTCHours()
       const minute = dt.getUTCMinutes()
       const first = new Date(dt - (dt % 900000))
       const second = new Date(first.getTime() + 3 * 900000)
@@ -289,6 +289,10 @@ export default {
 
 .text-color {
   color:rgb(80, 80, 80);
+}
+
+.app-description {
+  word-break: break-word;
 }
 
 </style>

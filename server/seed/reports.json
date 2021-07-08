@@ -1,38 +1,38 @@
 [
   {
     "userId": "1",
-    "title": "Report #1",
+    "title": "Raport analize inițiale",
     "size": "5",
-    "link": "../assets/Reports/report1.pdf"
+    "link": "/static/report1.pdf"
   },
   {
     "userId": "1",
-    "title": "Report #2",
+    "title": "Raport analize toxicologie",
     "size": "3",
-    "link": "../assets/Reports/report1.pdf"
+    "link": "/static//report1.pdf"
   },
   {
     "userId": "1",
-    "title": "Report #3",
+    "title": "Raport analize progres 20.05.2021",
     "size": "10",
-    "link": "../assets/Reports/report1.pdf"
+    "link": "/static/report1.pdf"
   },
   {
     "userId": "2",
-    "title": "Report #1",
+    "title": "Raport analize inițiale",
     "size": "5",
-    "link": "../assets/Reports/report1.pdf"
+    "link": "/static/report1.pdf"
   },
   {
     "userId": "2",
-    "title": "Report #2",
+    "title": "Raport analize progres 20.05.2021",
     "size": "3",
-    "link": "../assets/Reports/report1.pdf"
+    "link": "/static/report1.pdf"
   },
   {
     "userId": "2",
-    "title": "Report #3",
+    "title": "Raport analize toxicologie",
     "size": "9",
-    "link": "../assets/Reports/report1.pdf"
+    "link": "/static/report1.pdf"
   }
 ]

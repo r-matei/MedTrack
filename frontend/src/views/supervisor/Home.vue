@@ -16,8 +16,8 @@
                   <v-img height="15vh" class="pic" contain :src="img.url" :alt="img.alt"></v-img>
                 </v-col>
                 <v-col cols="9" class="ma-0 pa-0">
-                  <v-card-text class="font-weight-bold text-h6">Welcome, Dr.{{ user.firstName }}</v-card-text>
-                  <v-card-content class="ml-4">Have a nice day at work</v-card-content>
+                  <v-card-text class="font-weight-bold text-h6">Bine ai venit, Dr.{{ user.firstName }}</v-card-text>
+                  <v-card-content class="ml-4">Să aveți o zi frumoasă!</v-card-content>
                 </v-col>
               </v-row>
             </v-card>
@@ -34,7 +34,7 @@
             align="center">
             <v-icon large color="rgb(44, 44, 44)" class="mb-2">mdi-account-multiple</v-icon>
             <br>
-            <v-text class="font-weight-bold text-h6">Patients</v-text>
+            <v-text class="font-weight-bold text-h6">Pacienți</v-text>
             <br>
             <v-text class="font-weight-regular text-h6">{{ patients.length }}</v-text>
           </v-card>
@@ -47,7 +47,7 @@
             align="center">
             <v-icon large color="rgb(44, 44, 44)" class="mb-2">mdi-medical-bag</v-icon>
             <br>
-            <v-text class="font-weight-bold text-h6">Trials</v-text>
+            <v-text class="font-weight-bold text-h6">Studii</v-text>
             <br>
             <v-text class="font-weight-regular text-h6">{{ trials.length }}</v-text>
           </v-card>
@@ -60,7 +60,7 @@
             align="center">
             <v-icon large color="rgb(44, 44, 44)" class="mb-2">mdi-calendar-multiple-check</v-icon>
             <br>
-            <v-text class="font-weight-bold text-h6">Appointments</v-text>
+            <v-text class="font-weight-bold text-h6">Programări</v-text>
             <br>
             <v-text class="font-weight-regular text-h6">{{ appointmentsNr }}</v-text>
           </v-card>
@@ -72,7 +72,7 @@
               <v-col cols="4" class="pa-0 ma-0">
                 <v-card-title>
                   <img width="35vh" class="ma-2" :src="chatImage.url" :alt="chatImage.alt">
-                  <p class="text-h5 font-weight-bold text-color ma-2">Online chat</p>
+                  <p class="text-h5 font-weight-bold text-color ma-2">Chat online</p>
                 </v-card-title>
                 <v-list>
                   <v-list-item-group
@@ -178,20 +178,23 @@
             </v-list-item-content>
           </v-list-item>
         </template>
-        <p class="font-weight-bold text-subtitle-1 ml-5">This week's appointments</p>
+        <p class="font-weight-bold text-subtitle-1 ml-5">Programările din această săptămână</p>
         <!-- appointments -->
-        <v-row v-for="pair in pairs" :key="pair">
-          <v-list-item two-line class="mx-5 mt-5">
-              <v-list-item-avatar>
-                <v-img :src="require('../../assets/Pictures/' + pair.patient.img)"></v-img>
-              </v-list-item-avatar>
+        <div v-if="pairs.length > 0">
+          <v-row v-for="pair in pairs" :key="pair">
+            <v-list-item two-line class="mx-5 mt-5">
+                <v-list-item-avatar>
+                  <v-img :src="require('../../assets/Pictures/' + pair.patient.img)"></v-img>
+                </v-list-item-avatar>
 
-              <v-list-item-content>
-                <v-list-item-title class="font-weight-bold text-subtitle-1">{{ pair.patient.firstName }} {{ pair.patient.lastName }}</v-list-item-title>
-                <v-list-item-subtitle class="text-size">{{ pair.date }} - {{ pair.time }}</v-list-item-subtitle>
-              </v-list-item-content>
-            </v-list-item>
-        </v-row>
+                <v-list-item-content>
+                  <v-list-item-title class="font-weight-bold text-subtitle-1">{{ pair.patient.firstName }} {{ pair.patient.lastName }}</v-list-item-title>
+                  <v-list-item-subtitle class="text-size">{{ pair.date }} - {{ pair.time }}</v-list-item-subtitle>
+                </v-list-item-content>
+              </v-list-item>
+          </v-row>
+        </div>
+        <div v-else class="mt-5 ml-5">Nu aveți rezultate introduse.</div>
         <v-row justify="center">
           <v-col>
             <v-row justify="center">
@@ -204,7 +207,7 @@
                 class="ma-16"
                 @click="reportTab = !reportTab">
                 <v-icon>mdi-plus</v-icon>
-                Add Report
+                Adaugă raport
               </v-btn>
             </v-row>
           </v-col>
@@ -227,11 +230,11 @@
             right>
               <v-icon color="grey">mdi-close-circle-outline</v-icon>
             </v-btn>
-            <v-card-title class="pa-10 grey--text text-subtitle">Complete the report details</v-card-title>
+            <v-card-title class="pa-10 grey--text text-subtitle">Vă rugăm să completați detaliile raportului</v-card-title>
             <v-text-field
               class="mt-3 grey--text px-10"
               v-model="report.userId"
-              label="Patient email"
+              label="Email pacient"
               required
               light
               :rules="[required]">
@@ -239,7 +242,7 @@
             <v-text-field
               class="mt-3 grey--text px-10"
               v-model="report.title"
-              label="Report title"
+              label="Titlul raportului"
               required
               light
               :rules="[required]">
@@ -247,7 +250,7 @@
             <v-file-input
               class="pr-10 pl-2"
               light
-              label="Report file (.pdf)"
+              label="Fișierul raportului (.pdf)"
               v-model="report.link"
               required
               :rules="[required]"
@@ -262,7 +265,7 @@
               class="mx-4 mb-4"
               @click="addReport">
               <v-icon>mdi-plus</v-icon>
-              Add
+              Adaugă
             </v-btn>
         </v-card>
       </v-overlay>
@@ -307,7 +310,7 @@ export default {
         userId: ''
       },
       error: '',
-      required: (value) => !!value || 'Required.',
+      required: (value) => !!value || 'Obligatoriu.',
       found: 0,
       // chat data
       newMessage: null,
@@ -419,7 +422,7 @@ export default {
         .every(key => !!this.report[key])
 
       if (!areAllFieldsFilledIn) {
-        this.error = 'Please fill in all the required fields.'
+        this.error = 'Vă rugăm să completați toate câmpurile obligatorii.'
         return
       }
 
@@ -431,12 +434,12 @@ export default {
       }
 
       if (this.found === 0) {
-        this.error = 'The patient email is not valid'
+        this.error = 'Emailul pacientului nu este valid.'
         return
       }
 
       this.report.size = this.report.link.size
-      this.report.link = '../assets/Reports/' + this.report.link.name
+      this.report.link = '/static/' + this.report.link.name
       try {
         await ReportsService.post(this.report)
         this.reportTab = false

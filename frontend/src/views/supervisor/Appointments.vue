@@ -8,7 +8,7 @@
         class="bradius ma-0 pa-0">
         <v-row class="ma-0">
           <v-col cols="12" class="pa-3">
-            <p class="text-h5 font-weight-bold mt-16 mx-16">Appointments schedule</p>
+            <p class="text-h5 font-weight-bold mt-16 mx-16">Calendar programări</p>
           </v-col>
         </v-row>
         <v-row class="ma-0">
@@ -27,7 +27,7 @@
                         color="grey darken-2"
                         @click="setToday"
                       >
-                        Today
+                        Astăzi
                       </v-btn>
                       <v-btn
                         fab
@@ -74,10 +74,10 @@
                         </template>
                         <v-list>
                           <v-list-item @click="type = 'week'">
-                            <v-list-item-title>Week</v-list-item-title>
+                            <v-list-item-title>Săptămână</v-list-item-title>
                           </v-list-item>
                           <v-list-item @click="type = 'month'">
-                            <v-list-item-title>Month</v-list-item-title>
+                            <v-list-item-title>Lună</v-list-item-title>
                           </v-list-item>
                         </v-list>
                       </v-menu>
@@ -135,7 +135,7 @@
                             color="secondary"
                             @click="selectedOpen = false"
                           >
-                            Cancel
+                            Închide
                           </v-btn>
                         </v-card-actions>
                       </v-card>
@@ -150,9 +150,10 @@
             <v-card width="40vh" height="65vh" class="rounded-xl mt-10 mx-10" elevation="2">
               <v-card-title>
                 <v-icon large>mdi-calendar-check</v-icon>
-                <p class="text-h5 font-weight-bold text-color ma-2">All appointments</p>
+                <p class="text-h5 font-weight-bold text-color ma-2">Toate programările</p>
               </v-card-title>
               <v-card
+                v-if="pairs.length > 0"
                 class="scroll-y"
                 height="45vh"
                 elevation="0"
@@ -181,6 +182,7 @@
                     </v-list-item>
                 </v-row>
               </v-card>
+              <div v-else class="ml-5">Nu aveți programări.</div>
               <v-row justify="center">
                 <v-col>
                   <v-row justify="center">
@@ -193,7 +195,7 @@
                       class="ma-10"
                       @click="appTab = !appTab">
                       <v-icon>mdi-plus</v-icon>
-                      Add Appointment
+                      Adaugă programare
                     </v-btn>
                   </v-row>
                 </v-col>
@@ -215,11 +217,11 @@
                   right>
                     <v-icon color="grey">mdi-close-circle-outline</v-icon>
                   </v-btn>
-                  <v-card-title class="pa-10 grey--text text-subtitle">Complete the appointment details</v-card-title>
+                  <v-card-title class="pa-10 grey--text text-subtitle">Completați detaliile programării</v-card-title>
                   <v-text-field
                     class="mt-3 grey--text px-10"
                     v-model="app.userId"
-                    label="Patient email"
+                    label="Emailul pacientului"
                     required
                     light
                     :rules="[required]">
@@ -227,7 +229,7 @@
                   <v-text-field
                     class="mt-3 grey--text px-10"
                     v-model="app.name"
-                    label="Appointment name"
+                    label="Numele programării"
                     required
                     light
                     :rules="[required]">
@@ -242,7 +244,7 @@
                   >
                     <template v-slot:activator="{ on }">
                     <v-text-field
-                      label="Date"
+                      label="Dată"
                       class="mt-3 grey--text px-10"
                       readonly
                       light
@@ -274,7 +276,7 @@
                     <template v-slot:activator="{ on, attrs }">
                       <v-text-field
                         v-model="appTime"
-                        label="Time"
+                        label="Oră"
                         light
                         prepend-icon="mdi-clock-time-four-outline"
                         readonly
@@ -293,7 +295,7 @@
                   <v-text-field
                     class="mt-3 grey--text px-10"
                     v-model="app.description"
-                    label="Description"
+                    label="Descriere"
                     required
                     light
                     :rules="[required]">
@@ -308,7 +310,7 @@
                     class="mx-4 mb-4"
                     @click="addAppointment">
                     <v-icon>mdi-plus</v-icon>
-                    Add
+                    Adaugă
                   </v-btn>
               </v-card>
             </v-overlay>
@@ -322,7 +324,7 @@
                 align="center"
                 class="pt-15"
                 >
-                  <p class="tab-text">Are you sure you want to delete this appointment?</p>
+                  <p class="tab-text">Sigur doriți să ștergeți această programare?</p>
                   <v-btn
                     color="#76C6D1"
                     dark
@@ -331,7 +333,7 @@
                     align-center
                     class="mx-15 my-4"
                     @click="deleteAppointment(deleteAppId)">
-                    Yes
+                    Da
                   </v-btn>
                   <v-btn
                     color="#76C6D1"
@@ -341,7 +343,7 @@
                     align-center
                     class="mx-15 my-4"
                     @click="deleteAppTab = false">
-                    No
+                    Nu
                   </v-btn>
               </v-card>
             </v-overlay>
@@ -492,7 +494,7 @@ export default {
       }
 
       if (this.found === 0) {
-        this.error = 'The patient email is not valid'
+        this.error = 'Emailul pacientului nu este valid'
         return
       }
       this.app.supervisorId = this.user.id
@@ -511,7 +513,7 @@ export default {
         .every(key => !!this.app[key])
 
       if (!areAllFieldsFilledIn) {
-        this.error = 'Please fill in all the required fields.'
+        this.error = 'Vă rugăm să completați toate câmpurile obligatorii.'
         return
       }
 

@@ -16,16 +16,16 @@
             align-center
             class="justify-end"
             @click="deleteTab = true">
-            Delete trial
+            Șterge studiu
           </v-btn>
         </div>
         <p class="px-5">Id: {{ trial.id }}</p>
 
-        <v-card-text class="mt-6 font-weight-bold text-h6">Description</v-card-text>
+        <v-card-text class="mt-6 font-weight-bold text-h6">Descriere</v-card-text>
         <v-card-text class="font-weight-regular text-h6">{{ trial.description }}</v-card-text>
-        <v-card-text class="mt-6 mb-3 font-weight-bold text-h6">General informations</v-card-text>
+        <v-card-text class="mt-6 mb-3 font-weight-bold text-h6">Informații generale</v-card-text>
         <v-row class="ma-0 pa-4">
-          <v-text class="font-weight-regular text-h7">Phase</v-text>
+          <v-text class="font-weight-regular text-h7">Fază</v-text>
           <v-spacer></v-spacer>
           <v-text class="font-weight-regular text-h7">{{ trial.phase }}</v-text>
         </v-row>
@@ -58,7 +58,7 @@
         align="center"
         class="pt-15"
         >
-          <p class="tab-text">Are you sure you want to delete this trial?</p>
+          <p class="tab-text">Sigur doriți să ștergeți acest studiu?</p>
           <v-btn
             color="#76C6D1"
             dark
@@ -67,7 +67,7 @@
             align-center
             class="mx-15 my-4"
             @click="deleteTrial()">
-            Yes
+            Da
           </v-btn>
           <v-btn
             color="#76C6D1"
@@ -77,7 +77,7 @@
             align-center
             class="mx-15 my-4"
             @click="deleteTab = false">
-            No
+            Nu
           </v-btn>
       </v-card>
     </v-overlay>

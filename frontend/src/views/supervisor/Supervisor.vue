@@ -38,7 +38,7 @@
                 text
                 class="my-4"
                 @click = "logout({name: 'register'})">
-                <v-icon medium class="mr-2 mb-1">mdi-logout-variant</v-icon>Logout
+                <v-icon medium class="mr-2 mb-1">mdi-logout-variant</v-icon>Deconectare
               </v-btn>
             </div>
           </template>
@@ -73,23 +73,23 @@
               text
               dark
               :to="{
-                path: '/register/supervisor'
+                path: '/inregistrare-supervizor'
               }">
-              Login
+              Conectare
             </v-btn>
 
             <v-btn
               text
               :to="{
-                path: '/register/supervisor'
+                path: '/inregistrare-supervizor'
               }">
-              Sign Up
+              Înregistrare
             </v-btn>
           </v-toolbar-items>
         </v-toolbar>
-        <v-text> This Content Isn't Available Right Now</v-text>
+        <v-text> Pentru a vedea conținutul acestei pagini trebuie să fiți conectat</v-text>
         <br>
-        <v-text>Please login first</v-text>
+        <v-text>Vă rugăm să vă înregistrați</v-text>
       </v-col>
     </v-row>
   </div>
@@ -105,10 +105,10 @@ export default {
         alt: 'Logo'
       },
       menu: [
-        { title: 'Home', icon: 'mdi-home-outline', link: '/supervisor/supervisor-home' },
-        { title: 'Clinical Trials', icon: 'mdi-clipboard-text-search-outline', link: '/supervisor/trials' },
-        { title: 'Patients', icon: 'mdi-account-multiple-outline', link: '/supervisor/patients' },
-        { title: 'Appointments', icon: 'mdi-calendar', link: '/supervisor/supervisor-appointments' }
+        { title: 'Acasă', icon: 'mdi-home-outline', link: '/supervizor/acasa-supervizor' },
+        { title: 'Studii clinice', icon: 'mdi-clipboard-text-search-outline', link: '/supervizor/studii-supervizor' },
+        { title: 'Pacienți', icon: 'mdi-account-multiple-outline', link: '/supervizor/pacienti-supervizor' },
+        { title: 'Programări', icon: 'mdi-calendar', link: '/supervizor/programari-supervizor' }
       ]
     }
   },
@@ -123,7 +123,7 @@ export default {
       this.$store.dispatch('setUserToken', null)
       this.$store.dispatch('setUser', null)
       this.$router.push({
-        path: '/register-supervisor'
+        path: '/inregistrare-supervizor'
       })
     }
   }

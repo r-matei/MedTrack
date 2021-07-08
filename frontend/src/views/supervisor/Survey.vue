@@ -4,7 +4,7 @@
       <v-card color="#76C6D1" height="101vh" dark class="ma-0 pa-0">
         <v-row class="fill-height" justify="center" align="center">
           <v-card-title class="text-h4 font-weight-medium">
-            Survey
+            Formular date personale
           </v-card-title>
         </v-row>
       </v-card>
@@ -17,7 +17,7 @@
             step="1"
             color="#76C6D1"
           >
-            Load your photo
+            Încarcă o poză
           </v-stepper-step>
 
           <v-divider></v-divider>
@@ -26,7 +26,7 @@
             step="2"
             color="#76C6D1"
           >
-            Personal informations
+            Informații personale
           </v-stepper-step>
 
         </v-stepper-header>
@@ -47,16 +47,16 @@
                   :src="loadImg.url"
                   width="30vh"
                   class="my-4"></v-img>
-                  Drag file here to upload
+                  Plasează aici o poză pentru a încărca
                   <br>
-                  or
+                  sau
                   <div class="file-wrapper">
-                    <input type="file" name="file-input" @change="handleFileInput" > Select file
+                    <input type="file" name="file-input" @change="handleFileInput" > Selectează o poză de profil
                   </div>
                   <ul>
                     <li v-for="(file, index) in files" :key="index">
                       {{ file.name }} ({{ file.size }} b)
-                      <button @click="removeFile(index)" title="Remove">Remove</button>
+                      <button @click="removeFile(index)" title="Remove">Șterge</button>
                     </li>
                   </ul>
                 </div>
@@ -69,7 +69,7 @@
                   color="#76C6D1" dark block
                   @click="e1 = 2"
                 >
-                  Continue
+                  Continuă
                 </v-btn>
               </v-col>
             </v-row>
@@ -86,7 +86,7 @@
               <v-text-field
                 class="mt-3"
                 v-model="user.phoneNumber"
-                label="Phone"
+                label="Telefon"
                 required
                 :rules="[required]"></v-text-field>
               <v-menu
@@ -99,7 +99,7 @@
               >
                 <template v-slot:activator="{ on }">
                 <v-text-field
-                  label="Birth Date"
+                  label="Data nașterii"
                   readonly
                   :value="fromDateDisp"
                   v-on="on"
@@ -135,7 +135,7 @@
                     v-model="user.street"
                     required
                     :rules="[required]"
-                    label="Street"></v-text-field>
+                    label="Stradă"></v-text-field>
                 </v-col>
                 <v-col
                   cols="12"
@@ -145,13 +145,13 @@
                     v-model="user.zipcode"
                     required
                     :rules="[required]"
-                    label="Zipcode"></v-text-field>
+                    label="Cod poștal"></v-text-field>
                 </v-col>
               </v-row>
               <v-select
                 v-model="trialName"
                 :items="trialsName"
-                label="Clinical Trial Supervisor"
+                label="Studiu Clinic"
                 dense
                 required
                 :rules="[required]"
@@ -164,14 +164,14 @@
                   color="#76C6D1" dark block
                   @click="e1 = 1"
                 >
-                  Back
+                  Înapoi
                 </v-btn>
               </v-col>
               <v-spacer></v-spacer>
               <v-col cols="2" align-end>
                 <v-btn color="#76C6D1" dark block
                   @click="upload">
-                  Finish
+                  Finalizare
                 </v-btn>
               </v-col>
             </v-row>
@@ -203,7 +203,7 @@ export default {
       agree: false,
       countryName: true,
       error: null,
-      required: (value) => !!value || 'Required.',
+      required: (value) => !!value || 'Obligatoriu.',
       trialName: []
     }
   },
@@ -265,7 +265,7 @@ export default {
       this.user.type = 'supervisor'
 
       if (this.files.length === 0) {
-        this.error = 'Please load an image of yourself'
+        this.error = 'Vă rugăm să încărcați o poză de profil.'
         return
       }
 
@@ -282,13 +282,13 @@ export default {
           this.user.street === '' ||
           this.user.zipcode === '' ||
           this.user.clinicalTrialId === '') {
-        this.error = 'Please fill in all the required fields'
+        this.error = 'Vă rugăm să completați toate câmpurile obligatorii.'
         return
       }
 
       try {
         await UserService.put(this.user)
-        this.$router.push('/supervisor/supervisor-home')
+        this.$router.push('/supervizor/acasa-supervizor')
       } catch (err) {
         console.log(err)
       }

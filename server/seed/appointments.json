@@ -1,37 +1,30 @@
 [
   {
     "userId": "1",
-    "name": "Appointment #1",
-    "supervisorId": "3",
-    "date": "2021-03-21 12:15",
-    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
+    "name": "Analize inițiale",
+    "supervisorId": "5",
+    "date": "2021-07-15 08:00",
+    "description": "Teste de sânge, toxicologie, markeri cardiaci, markeri virali, serologie boli infecțioase. Să nu se consume apă sau alimente înainte de programare."
   },
   {
     "userId": "1",
-    "name": "Appointment #2",
-    "supervisorId": "3",
-    "date": "2021-04-19 10:30",
-    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
-  },
-  {
-    "userId": "1",
-    "name": "Appointment #3",
-    "supervisorId": "3",
-    "date": "2021-04-18 14:30",
-    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
+    "name": "Verificare progres",
+    "supervisorId": "5",
+    "date": "2021-08-10 10:30",
+    "description": "Teste de sânge, observație progres medicație."
   },
   {
     "userId": "2",
-    "name": "Appointment #1",
-    "supervisorId": "1",
-    "date": "2021-04-01 10:00",
-    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
+    "name": "Analize inițiale",
+    "supervisorId": "5",
+    "date": "2021-06-23 14:30",
+    "description": "Teste de sânge, toxicologie, markeri cardiaci, markeri virali, serologie boli infecțioase. Să nu se consume apă sau alimente înainte de programare."
   },
   {
     "userId": "2",
-    "name": "Appointment #2",
-    "supervisorId": "1",
-    "date": "2021-04-21 12:00",
-    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
+    "name": "Verificare progres",
+    "supervisorId": "5",
+    "date": "2021-07-10 10:30",
+    "description": "Teste de sânge, observație progres medicație."
   }
 ]

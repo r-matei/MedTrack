@@ -20,7 +20,7 @@
       <div class="mx-15 my-10">
         <p class="trial-title">{{ trial.title }}</p>
         <p class="trial-text">{{ trial.description }}</p>
-        <p class="trial-colored-text">If you are interested in participating in the trial:</p>
+        <p class="trial-colored-text">Dacă doriți să vă înregistrați la acest studiu trebuie să respectați următoarele cerințe:</p>
         <div v-for="(require, index) in requirements" :key="index">
           <v-icon v-if="index != 0" color="#76C6D1">mdi-chevron-right</v-icon>
           <span v-if="index != 0">{{ require }}</span>
@@ -32,7 +32,7 @@
           height="5vh"
           x-large
           class="mt-15"
-          @click="submitTrial(trial.id)">Register your interest in this clinical trial</v-btn>
+          @click="submitTrial(trial.id)">Înregistrează-te la acest studiu clinic</v-btn>
       </div>
     </v-col>
   </v-row>
@@ -84,7 +84,7 @@ export default {
       try {
         this.user.clinicalTrialId = trialId
         await UserService.put(this.user)
-        this.$router.push('/survey')
+        this.$router.push('/formular')
       } catch (err) {
         console.log(err)
       }

@@ -18,7 +18,11 @@ module.exports = {
   },
   async show (req, res) {
     try {
-      const trial = await ClinicalTrial.findAll()
+      const trial = await ClinicalTrial.findAll({
+        where: {
+          status: 'active'
+        }
+      })
       res.send(trial)
     } catch (err) {
       res.status(500).send({

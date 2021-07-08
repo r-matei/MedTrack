@@ -30,100 +30,100 @@ Vue.use(Router)
 export default new Router({
   routes: [
     {
-      path: '/patient',
+      path: '/pacient',
       name: 'Patient',
       component: Patient,
       children: [
         {
-          path: 'home',
+          path: 'acasa',
           name: 'Home',
           component: HomePatient
         },
         {
-          path: 'appointments',
+          path: 'programari',
           name: 'Patient Appointments',
           component: AppointmentsPatient
         },
         {
-          path: 'medication',
+          path: 'medicatie',
           name: 'Medication',
           component: MedicationPatient
         }
       ]
     },
     {
-      path: '/register',
+      path: '/inregistrare',
       name: 'Register Patient',
       component: Register
     },
     {
-      path: '/trial/:trialId',
+      path: '/studiu/:trialId',
       name: 'trial',
       component: Trial
     },
     {
-      path: '/clinical-trials',
+      path: '/studii-clinice',
       name: 'clinical-trials',
       component: ClinicalTrials
     },
     {
-      path: '/survey',
+      path: '/formular',
       name: 'survey',
       component: Survey
     },
     {
-      path: '/register-supervisor',
+      path: '/inregistrare-supervizor',
       name: 'Register Supervisor',
       component: RegisterSupervisor
     },
     {
-      path: '/supervisor',
+      path: '/supervizor',
       name: 'Supervisor',
       component: Supervisor,
       children: [
         {
-          path: 'supervisor-home',
+          path: 'acasa-supervizor',
           name: 'Supervisor Home',
           component: HomeSupervisor
         },
         {
-          path: 'trials',
+          path: 'studii-supervizor',
           name: 'Trials',
           component: Trials
         },
         {
-          path: 'trials/:trialId',
+          path: 'studii-supervizor/:trialId',
           name: 'clinical-trial',
           component: ViewTrial
         },
         {
-          path: 'patients',
+          path: 'pacienti-supervizor',
           name: 'Patients',
           component: Patients
         },
         {
-          path: 'patients/:patientId',
+          path: 'pacienti-supervizor/:patientId',
           name: 'viewPatient',
           component: ViewPatient
         },
         {
-          path: 'supervisor-appointments',
+          path: 'programari-supervizor',
           name: 'Supervisor Appointments',
           component: AppointmentsSupervisor
         }
       ]
     },
     {
-      path: '/survey-supervisor',
+      path: '/formular-supervizor',
       name: 'Supervisor Survey',
       component: SurveySupervisor
     },
     {
       path: '*',
-      redirect: 'register'
+      redirect: 'inregistrare'
     },
     {
-      path: '/reports/clinical-trials',
+      path: '/rapoarte/studii-clinice',
       name: 'Clinical Trials reports',
       component: Reports
     }

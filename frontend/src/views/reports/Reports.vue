@@ -5,10 +5,10 @@
       <v-col cols="7">
         <v-img height="30vh" contain class="my-1" :src="img.url" :alt="img.alt"></v-img>
         <div class="align-text">
-          <span class="ml-15 display-1">INFORM</span><img class="mx-2" height="30px" contain src="https://ik.imagekit.io/roxanam/head_bVsq_7-QjB1.png">
-          <span class="ml-15 display-1">ENGAGE<img class="mx-2" height="30px" contain src="https://ik.imagekit.io/roxanam/touch_klEagf7Ig.png"></span>
-          <span class="ml-15 display-1">EMPOWER<img class="mx-2" height="30px" contain src="https://ik.imagekit.io/roxanam/muscles_1X0fH5OpM.png"></span>
-          <p class="my-5 text-h5">Your clinical trial management</p>
+          <span class="ml-15 display-1">INFORMEAZĂ</span><img class="mx-2" height="30px" contain src="https://ik.imagekit.io/roxanam/head_bVsq_7-QjB1.png">
+          <span class="ml-15 display-1">AJUTĂ<img class="mx-2" height="30px" contain src="https://ik.imagekit.io/roxanam/touch_klEagf7Ig.png"></span>
+          <span class="ml-15 display-1">ÎMPUTERNICEȘTE<img class="mx-2" height="30px" contain src="https://ik.imagekit.io/roxanam/muscles_1X0fH5OpM.png"></span>
+          <p class="my-5 text-h5">Sistem de management al studiilor clinice</p>
         </div>
       </v-col>
       <v-col cols="5" class="pa-0 ma-0">
@@ -19,16 +19,16 @@
   <div class="reports">
     <div class="container">
       <div>
-        <p class="text-h5 mt-15">Choose a trial to show data</p>
+        <p class="text-h5 mt-15">Alegeți studiul clinic care vă interesează:</p>
         <v-select
-          placeholder="Choose trial"
+          placeholder="Alegeți studiul clinic"
           :items="trialsTitles"
           v-model="selectedTitle"
         ></v-select>
       </div>
       <div>
         <div v-if="loaded" class="mt-10 font-weight-bold">
-          Registered Patients during registration period<span>for clinical trial: {{ selectedTrial.title }}</span>
+         Pacienții înregistrați în perioada de înregistrare<span> pentru studiul clinic: {{ selectedTrial.title }}</span>
           <hr>
         </div>
         <div>
@@ -37,7 +37,7 @@
       </div>
       <div>
         <div v-if="loaded" class="mt-10 font-weight-bold">
-          Patients number per clinical trials
+          Numărul de pacienți înregistrați în fiecare studiu clinic
           <hr>
         </div>
         <div>
@@ -46,11 +46,11 @@
       </div>
       <div>
         <div v-if="loaded" class="mt-10 font-weight-bold">
-          Created Clinical Trials in time
+          Studiile clinice create în timp
           <hr>
         </div>
         <div>
-          <line-chart v-if="loaded" height="300px" class="chart1" :chart-data="chart2Labels" :chartLabels="chart3Labels"></line-chart>
+          <line-chart v-if="loaded" height="300px" class="chart1" :chart-data="chart3Data" :chartLabels="chart3Labels"></line-chart>
         </div>
       </div>
     </div>
@@ -63,7 +63,6 @@
 <script>
 import UserService from '../../services/UserService'
 import TrialsService from '../../services/TrialsService'
-import ResultsService from '../../services/ResultsService'
 
 import LineChart from '../../components/LineChart.vue'
 import BarChart from '../../components/BarChart.vue'
@@ -85,7 +84,6 @@ export default {
       },
       patients: [],
       trials: [],
-      results: [],
       selectedTrial: {},
       selectedTitle: '',
       loaded: false,
@@ -97,6 +95,7 @@ export default {
       chart2Labels: [],
       chart2Data: [],
       chart3Labels: [],
+      chart3Data: [],
       loaded: false,
       datacollection: null
     }
@@ -104,7 +103,6 @@ export default {
   async mounted () {
     this.patients = (await UserService.patientsForReports()).data
     this.trials = (await TrialsService.trialsForReports()).data
-    this.results = (await ResultsService.show()).data
 
     for (var i = 0; i < this.patients.length; i++) {
       this.registeredPatients.push(this.patients[i])
@@ -174,6 +172,14 @@ export default {
         if (this.search (this.chart3Labels, d)) {
           continue;
         }
+        for (var j=0; j<this.trials.length; j++) {
+          var d2 = new Date(this.trials[j].createdAt)
+          d2 = d2.toDateString()
+          if (d === d2 && this.trials[i].id !== this.trials[j].id) {
+            sum++
+          }
+        }
+        this.chart3Data.push(sum)
         this.chart3Labels.push(d)
       }
       this.loaded = true

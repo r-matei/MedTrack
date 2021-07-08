@@ -17,32 +17,32 @@ module.exports = {
       switch (error.details[0].context.key) {
         case 'firstName':
           res.status(400).send({
-            error: 'You must provide your First Name'
+            error: 'Vă rugăm să vă completați prenumele.'
           })
           break
         case 'lastName':
           res.status(400).send({
-            error: 'You must provide your Last Name'
+            error: 'Vă rugăm să vă completați numele.'
           })
           break
         case 'email':
           res.status(400).send({
-            error: 'You must provide a valid email address'
+            error: 'Vă rugăm să introduceți o adresă de email validă.'
           })
           break
         case 'password':
           res.status(400).send({
-            error: `The password provided failed to match the following rules:
+            error: `Parola trebuie să respecte următoarele reguli:
               <br>
-              1. It must contain only following characters: lower case, upper case, numerics.
+              1. Trebuie să conțină doar următoarele tipuri de caractere: litere mici, litere mari, cifre.
               <br>
-              2. it must be at least 8 characters in length and not greater than 32 characters in length.
+              2. Trebuie să conțină între 8 și 32 de caractere.
             `
           })
           break
         default:
           res.status(400).send({
-            error: 'Invalid registration information'
+            error: 'Datele de înregistrare nu sunt valide'
           })
       }
     } else {

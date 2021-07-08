@@ -16,7 +16,7 @@
               align-center
               class="justify-end"
               @click="deleteTab = true">
-              Delete patient
+              Șterge pacient
             </v-btn>
             <v-btn
               color="#76C6D1"
@@ -25,21 +25,21 @@
               class="mx-5 justify-end"
               @click="resultsTab = !resultsTab">
               <v-icon>mdi-plus</v-icon>
-              Add results
+              Adaugă rezultate
             </v-btn>
           </div>
           <br>
-          <v-text class="pa-4 font-weight-regular text-h7">Clinical Trial: {{ trial.title }}</v-text>
+          <v-text class="pa-4 font-weight-regular text-h7">Studiu clinic: {{ trial.title }}</v-text>
 
-          <v-card-text class="mt-6 mb-3 font-weight-bold text-h6">General informations</v-card-text>
+          <v-card-text class="mt-6 mb-3 font-weight-bold text-h6">Informații generale</v-card-text>
           <v-row class="ma-0 pa-4">
-            <v-text class="font-weight-regular text-h7">Date of Birth</v-text>
+            <v-text class="font-weight-regular text-h7">Data nașterii</v-text>
             <v-spacer></v-spacer>
             <v-text class="font-weight-regular text-h7">{{ patient.birthDate }}</v-text>
           </v-row>
           <v-divider></v-divider>
           <v-row class="ma-0 pa-4">
-            <v-text class="font-weight-regular text-h7">Age</v-text>
+            <v-text class="font-weight-regular text-h7">Vârstă</v-text>
             <v-spacer></v-spacer>
             <v-text class="font-weight-regular text-h7">{{ patient.age }}</v-text>
           </v-row>
@@ -51,37 +51,37 @@
           </v-row>
           <v-divider></v-divider>
           <v-row class="ma-0 pa-4">
-            <v-text class="font-weight-regular text-h7">Blood Type</v-text>
+            <v-text class="font-weight-regular text-h7">Grupă sanguină</v-text>
             <v-spacer></v-spacer>
             <v-text class="font-weight-regular text-h7">{{ patient.bloodType }}</v-text>
           </v-row>
           <v-divider></v-divider>
           <v-row class="ma-0 pa-4">
-            <v-text class="font-weight-regular text-h7">Height</v-text>
+            <v-text class="font-weight-regular text-h7">Înălțime</v-text>
             <v-spacer></v-spacer>
             <v-text class="font-weight-regular text-h7">{{ patient.height }} cm</v-text>
           </v-row>
           <v-divider></v-divider>
           <v-row class="ma-0 pa-4">
-            <v-text class="font-weight-regular text-h7">Weight</v-text>
+            <v-text class="font-weight-regular text-h7">Greutate</v-text>
             <v-spacer></v-spacer>
             <v-text class="font-weight-regular text-h7">{{ patient.weight }} kg</v-text>
           </v-row>
           <v-divider></v-divider>
           <v-row class="ma-0 pa-4">
-            <v-text class="font-weight-regular text-h7">Nationality</v-text>
+            <v-text class="font-weight-regular text-h7">Naționalitate</v-text>
             <v-spacer></v-spacer>
             <v-text class="font-weight-regular text-h7">{{ patient.state }}</v-text>
           </v-row>
           <v-divider></v-divider>
           <v-row class="ma-0 pa-4">
-            <v-text class="font-weight-regular text-h7">Address</v-text>
+            <v-text class="font-weight-regular text-h7">Adresă</v-text>
             <v-spacer></v-spacer>
             <v-text class="font-weight-regular text-h7">{{ patient.city }}, {{ patient.street }}</v-text>
           </v-row>
           <v-divider></v-divider>
           <v-row class="ma-0 pa-4">
-            <v-text class="font-weight-regular text-h7">Zipcode</v-text>
+            <v-text class="font-weight-regular text-h7">Cod poștal</v-text>
             <v-spacer></v-spacer>
             <v-text class="font-weight-regular text-h7">{{ patient.zipcode }}</v-text>
           </v-row>
@@ -103,11 +103,11 @@
               right>
                 <v-icon color="grey">mdi-close-circle-outline</v-icon>
               </v-btn>
-              <v-card-title class="pa-10 grey--text text-subtitle">Complete the results details</v-card-title>
+              <v-card-title class="pa-10 grey--text text-subtitle">Completați detaliile rezultatelor</v-card-title>
               <v-text-field
                 class="mt-3 grey--text px-10"
                 v-model="results.title"
-                label="Title"
+                label="Titlu"
                 required
                 light
                 :rules="[required]">
@@ -115,7 +115,7 @@
               <v-textarea
                 class="mt-3 grey--text px-10"
                 v-model="results.text"
-                label="Description"
+                label="Descriere"
                 required
                 light
                 :rules="[required]">
@@ -123,7 +123,7 @@
               <v-text-field
                 class="mt-3 grey--text px-10"
                 v-model="results.healthCoef"
-                label="Health Coefficient"
+                label="Coeficient de sănătate"
                 required
                 light
                 :rules="[required]">
@@ -138,7 +138,7 @@
                 class="mx-4 mb-4"
                 @click="addResults">
                 <v-icon>mdi-plus</v-icon>
-                Add
+                Adaugă
               </v-btn>
           </v-card>
         </v-overlay>
@@ -152,7 +152,7 @@
             align="center"
             class="pt-15"
             >
-              <p class="tab-text">Are you sure you want to delete this patient?</p>
+              <p class="tab-text">Sigur doriți să ștergeți acest pacient?</p>
               <v-btn
                 color="#76C6D1"
                 dark
@@ -161,7 +161,7 @@
                 align-center
                 class="mx-15 my-4"
                 @click="deletePatient()">
-                Yes
+                Da
               </v-btn>
               <v-btn
                 color="#76C6D1"
@@ -171,7 +171,7 @@
                 align-center
                 class="mx-15 my-4"
                 @click="deleteTab = false">
-                No
+                Nu
               </v-btn>
           </v-card>
         </v-overlay>
@@ -193,7 +193,7 @@ export default {
       trial: {},
       resultsTab: false,
       error: '',
-      required: (value) => !!value || 'Required.',
+      required: (value) => !!value || 'Obligatoriu.',
       results: {
         userId: '',
         title: '',
@@ -236,7 +236,7 @@ export default {
         .every(key => !!this.results[key])
 
       if (!areAllFieldsFilledIn) {
-        this.error = 'Please fill in all the required fields.'
+        this.error = 'Vă rugăm să completați toate câmpurile obligatorii.'
         return
       }
       try {

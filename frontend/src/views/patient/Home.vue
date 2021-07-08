@@ -9,8 +9,8 @@
         class="bradius ma-0 pa-0">
         <v-row class="ma-0">
           <v-col cols="6" class="pa-5">
-            <p class="text-h5 font-weight-bold mt-16 mx-16">Welcome {{ user.firstName }} {{ user.lastName }}!</p>
-            <p class="text-subtitle1 font-weight-regular mx-16">Let's check your test results</p>
+            <p class="text-h5 font-weight-bold mt-16 mx-16">Bine ai venit, {{ user.firstName }} {{ user.lastName }}!</p>
+            <p class="text-subtitle1 font-weight-regular mx-16">Aici vă puteți verifica rezultatele testelor</p>
             <v-card width="30vh" class="mx-16 mt-16 pa-5 rounded-xl" align="center" elevation="2">
               <v-card-text class="font-weight-bold text-h6">{{ clinicalTrial.title }} Phase {{ clinicalTrial.phase }}</v-card-text>
             </v-card>
@@ -22,11 +22,11 @@
         <v-row class="ma-0" align="center" justify="center">
           <!-- health graphic -->
           <v-col cols="7" class="pa-5">
-            <v-card width="60vh" height="45vh" class="rounded-xl ml-16" elevation="2">
+            <v-card width="60vh" height="40vh" class="rounded-xl ml-16" elevation="2">
               <v-card-title>
-                <p class="text-h5 font-weight-bold text-color mx-2 mt-2 mb-0">Health Curve</p>
+                <p class="text-h5 font-weight-bold text-color mx-2 mt-2 mb-0">Grafic de progres al sănătății</p>
               </v-card-title>
-              <div class="healthGraphic">
+              <div v-if="graphicValues.length > 1" class="healthGraphic">
                 <v-sparkline
                   :labels="labels"
                   :value="graphicValues"
@@ -42,15 +42,16 @@
                   class="mx-5"
                 ></v-sparkline>
               </div>
+              <div v-else class="mx-5">Nu aveți valori introduse.</div>
             </v-card>
           </v-col>
           <!-- reports documents -->
           <v-col cols="5" class="pa-5">
-            <v-card width="52vh" height="45vh" class="rounded-xl" elevation="2">
+            <v-card width="52vh" height="40vh" class="rounded-xl" elevation="2">
               <v-card-title>
-                <p class="text-h5 font-weight-bold text-color mx-2 mt-2 mb-0">Health Report Documents</p>
+                <p class="text-h5 font-weight-bold text-color mx-2 mt-2 mb-0">Rapoarte de analize</p>
               </v-card-title>
-               <v-card-text>
+               <v-card-text v-if="reports.length > 0">
                 <v-list>
                   <v-list-item-group
                     color="primary"
@@ -73,9 +74,10 @@
                   </v-list-item-group>
                 </v-list>
               </v-card-text>
+              <div v-else class="mx-5">Nu aveți rapoarte încărcate.</div>
             </v-card>
           </v-col>
-          <p class="mt-3">You can find more details about this study <a :href="clinicalTrial.link">here</a></p>
+          <p class="mt-3">Puteți citi mai multe detalii despre acest studiu <a :href="clinicalTrial.link">aici</a></p>
         </v-row>
       </v-card>
     </v-col>
@@ -108,7 +110,7 @@
               elevation="0"
             >
               <p class="font-weight-bold ma-1">{{ user.bloodType }}</p>
-              <p>Blood type</p>
+              <p>Sânge</p>
             </v-card>
           </v-col>
           <v-divider vertical></v-divider>
@@ -119,7 +121,7 @@
               elevation="0"
             >
               <p class="font-weight-bold ma-1">{{ user.height }}cm</p>
-              <p>Height</p>
+              <p>Înălțime</p>
             </v-card>
           </v-col>
           <v-divider vertical></v-divider>
@@ -130,23 +132,26 @@
               elevation="0"
             >
               <p class="font-weight-bold ma-1">{{ user.weight }}kg</p>
-              <p>Weight</p>
+              <p>Greutate</p>
             </v-card>
           </v-col>
         </v-row>
-        <v-row v-for="result in results" :key="result.id">
-          <v-card
-            class="pa-5 mx-13 my-5 text-size rounded-lg"
-            align="start"
-            elevation="2"
-            color="#F6FAFD">
-            <v-card-text class="pa-1">
-              <p>{{ result.date }}</p>
-              <p class="font-weight-bold">{{ result.title }}</p>
-              <p>{{ result.text }}</p>
-            </v-card-text>
-          </v-card>
-        </v-row>
+        <div v-if="results.length > 0">
+          <v-row v-for="result in results" :key="result.id">
+            <v-card
+              class="pa-5 mx-13 my-5 text-size rounded-lg"
+              align="start"
+              elevation="2"
+              color="#F6FAFD">
+              <v-card-text class="pa-1">
+                <p>{{ result.date }}</p>
+                <p class="font-weight-bold">{{ result.title }}</p>
+                <p>{{ result.text }}</p>
+              </v-card-text>
+            </v-card>
+          </v-row>
+        </div>
+        <div v-else style="text-align: center; margin-top: 10px;">Nu aveți rezultate introduse.</div>
       </v-navigation-drawer>
     </v-col>
   </v-row>

@@ -5,7 +5,7 @@
     </v-col>
     <v-col cols="7" class="pa-0 ma-0">
       <v-img contain class="logo-size mx-auto" :src="logo.url" :alt="logo.alt"></v-img>
-      <h1 class="font-weight-bold welcome">Welcome</h1>
+      <h1 class="font-weight-bold welcome">Bine ai venit!</h1>
       <v-row
         align="center"
         justify="center"
@@ -36,7 +36,7 @@
                                       v-model="userLogin.loginPassword"
                                       type="password"
                                       name="loginPassword"
-                                      label="Password"
+                                      label="Parolă"
                                       hint="At least 8 characters"
                                       required
                                       :rules="[required]"
@@ -48,7 +48,7 @@
                                     class="text-xs font-weight-light forgot-psw pa-0"
                                     color="grey"
                                     plain
-                                  >Forgot password?</v-btn>
+                                  >Ați uitat parola?</v-btn>
                                 </v-col>
                                 <v-spacer></v-spacer>
                                 <div class="text-error" v-html="errorLogin"/>
@@ -59,7 +59,7 @@
                                       type="submit"
                                       color="#76C6D1"
                                       class="mt-5 white-text"
-                                      @click="login"> Login </v-btn>
+                                      @click="login"> Conectează-te </v-btn>
                                 </v-col>
                             </v-row>
                           </v-card-text>
@@ -74,7 +74,7 @@
                                       color="#76C6D1"
                                       outlined
                                       v-model="userRegister.firstName"
-                                      label="First Name"
+                                      label="Prenume"
                                       maxlength="20"
                                       required
                                       :rules="[required]"></v-text-field>
@@ -84,7 +84,7 @@
                                       color="#76C6D1"
                                       outlined
                                       v-model="userRegister.lastName"
-                                      label="Last Name"
+                                      label="Nume"
                                       maxlength="20"
                                       required
                                       :rules="[required]"></v-text-field>
@@ -110,7 +110,7 @@
                                       required
                                       :rules="[required]"
                                       autocomplete="new-password"
-                                      label="Password"></v-text-field>
+                                      label="Parolă"></v-text-field>
                                 </v-col>
                                 <v-col cols="12" sm="6" md="6" class="pr-0 py-0">
                                     <v-text-field
@@ -122,7 +122,7 @@
                                       required
                                       :rules="[required]"
                                       name="verify-password"
-                                      label="Confirm Password"></v-text-field>
+                                      label="Confirmă parola"></v-text-field>
                                 </v-col>
                                 <v-col class="px-0 pt-0" cols="12">
                                     <div class="text-error" v-html="errorRegister"/>
@@ -132,7 +132,7 @@
                                       type="submit"
                                       color="#76C6D1"
                                       class="mt-5 white-text"
-                                      @click="register"> Register </v-btn>
+                                      @click="register"> Înregistrează-te </v-btn>
                                 </v-col>
                             </v-row>
                           </v-card-text>
@@ -161,8 +161,8 @@ export default {
       dialog: true,
       tab: 0,
       tabs: [
-        {name: 'Login'},
-        {name: 'Register'}
+        {name: 'Conectare'},
+        {name: 'Înregistrare'}
       ],
       userRegister: {
         firstName: '',
@@ -177,7 +177,7 @@ export default {
       },
       errorRegister: null,
       errorLogin: null,
-      required: (value) => !!value || 'Required.'
+      required: (value) => !!value || 'Obligatoriu.'
     }
   },
   methods: {
@@ -189,12 +189,12 @@ export default {
         .every(key => !!this.userRegister[key])
 
       if (!areAllFieldsFilledIn) {
-        this.errorRegister = 'Please fill in all the required fields.'
+        this.errorRegister = 'Vă rugăm să completați toate câmpurile obligatorii.'
         return
       }
 
       if (this.userRegister.registerPassword !== this.userRegister.verify) {
-        this.errorRegister = 'Password must match.'
+        this.errorRegister = 'Parolele nu se potrivesc.'
         return
       }
 
@@ -222,10 +222,9 @@ export default {
         .every(key => !!this.userLogin[key])
 
       if (!areAllFieldsFilledIn) {
-        this.errorLogin = 'Please fill in all the required fields.'
+        this.errorLogin = 'Vă rugăm să completați toate câmpurile obligatorii.'
         return
       }
-
       try {
         const response = await AuthenticationService.login({
           email: this.userLogin.loginEmail,

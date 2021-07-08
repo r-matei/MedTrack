@@ -22,6 +22,7 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   color: #2c3e50;
   font-family: 'Raleway', sans-serif;
+  overflow: hidden;
 }
 
 </style>

@@ -1,34 +1,130 @@
 [
   {
     "clinicalTrialId": "1",
-    "type": "pill",
-    "name": "Medication #1",
-    "period": "6 hours",
-    "qtyPerUse": "2",
+    "type": "pastile",
+    "name": "Siofor 1000mg",
+    "period": "12 ore",
+    "qtyPerUse": "1",
     "qtyPerPacient": "60"
   },
   {
     "clinicalTrialId": "1",
-    "type": "pill",
-    "name": "Medication #2",
-    "period": "4 hours",
-    "qtyPerUse": "1",
+    "type": "pastile",
+    "name": "Esquel (R) 80mg",
+    "period": "6 ore",
+    "qtyPerUse": "2",
     "qtyPerPacient": "80"
   },
   {
     "clinicalTrialId": "1",
     "type": "pill",
-    "name": "Medication #3",
-    "period": "12 hours",
+    "name": "Humalog Mix 25kwik-pen 100ui/ml ",
+    "period": "8 ore",
     "qtyPerUse": "1",
     "qtyPerPacient": "30"
   },
   {
-    "clinicalTrialId": "1",
-    "type": "vaccine",
-    "name": "Vaccine #1",
-    "period": "30 days",
+    "clinicalTrialId": "2",
+    "type": "vaccin",
+    "name": "Adacel suspensie injectabila",
+    "period": "2 zile",
     "qtyPerUse": "1",
-    "qtyPerPacient": "3"
+    "qtyPerPacient": "6"
+  },
+  {
+    "clinicalTrialId": "2",
+    "type": "pastile",
+    "name": "Siofor 1000mg",
+    "period": "12 ore",
+    "qtyPerUse": "1",
+    "qtyPerPacient": "60"
+  },
+  {
+    "clinicalTrialId": "3",
+    "type": "pastile",
+    "name": "Esquel (R) 80mg",
+    "period": "6 ore",
+    "qtyPerUse": "2",
+    "qtyPerPacient": "80"
+  },
+  {
+    "clinicalTrialId": "3",
+    "type": "pill",
+    "name": "Humalog Mix 25kwik-pen 100ui/ml ",
+    "period": "8 ore",
+    "qtyPerUse": "1",
+    "qtyPerPacient": "30"
+  },
+  {
+    "clinicalTrialId": "3",
+    "type": "pastile",
+    "name": "Siofor 1000mg",
+    "period": "12 ore",
+    "qtyPerUse": "1",
+    "qtyPerPacient": "60"
+  },
+  {
+    "clinicalTrialId": "3",
+    "type": "pastile",
+    "name": "Esquel (R) 80mg",
+    "period": "6 ore",
+    "qtyPerUse": "2",
+    "qtyPerPacient": "80"
+  },
+  {
+    "clinicalTrialId": "4",
+    "type": "pill",
+    "name": "Humalog Mix 25kwik-pen 100ui/ml ",
+    "period": "8 ore",
+    "qtyPerUse": "1",
+    "qtyPerPacient": "30"
+  },
+  {
+    "clinicalTrialId": "4",
+    "type": "pastile",
+    "name": "Siofor 1000mg",
+    "period": "12 ore",
+    "qtyPerUse": "1",
+    "qtyPerPacient": "60"
+  },
+  {
+    "clinicalTrialId": "5",
+    "type": "pastile",
+    "name": "Esquel (R) 80mg",
+    "period": "6 ore",
+    "qtyPerUse": "2",
+    "qtyPerPacient": "80"
+  },
+  {
+    "clinicalTrialId": "5",
+    "type": "pill",
+    "name": "Humalog Mix 25kwik-pen 100ui/ml ",
+    "period": "8 ore",
+    "qtyPerUse": "1",
+    "qtyPerPacient": "30"
+  },
+  {
+    "clinicalTrialId": "5",
+    "type": "pastile",
+    "name": "Siofor 1000mg",
+    "period": "12 ore",
+    "qtyPerUse": "1",
+    "qtyPerPacient": "60"
+  },
+  {
+    "clinicalTrialId": "6",
+    "type": "pastile",
+    "name": "Esquel (R) 80mg",
+    "period": "6 ore",
+    "qtyPerUse": "2",
+    "qtyPerPacient": "80"
+  },
+  {
+    "clinicalTrialId": "6",
+    "type": "pill",
+    "name": "Humalog Mix 25kwik-pen 100ui/ml ",
+    "period": "8 ore",
+    "qtyPerUse": "1",
+    "qtyPerPacient": "30"
   }
 ]

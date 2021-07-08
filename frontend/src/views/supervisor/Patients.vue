@@ -6,7 +6,7 @@
       <v-text-field
         v-model="search"
         append-icon="mdi-magnify"
-        label="Search"
+        label="Caută"
         single-line
         hide-details
       ></v-text-field>
@@ -73,14 +73,14 @@ export default {
       patients: [],
       search: '',
       headers: [
-        { text: 'First Name', value: 'firstName' },
-        { text: 'Last Name', value: 'lastName' },
+        { text: 'Prenume', value: 'firstName' },
+        { text: 'Nume', value: 'lastName' },
         { text: 'Email', value: 'email' },
-        { text: 'Phone', value: 'phoneNumber' },
-        { text: 'Age', value: 'age' },
-        { text: 'City', value: 'city' },
-        { text: 'Clinical Trial ID', value: 'trialId' },
-        { text: 'Details', value: '' }
+        { text: 'Telefon', value: 'phoneNumber' },
+        { text: 'Vârstă', value: 'age' },
+        { text: 'Oraș', value: 'city' },
+        { text: 'Studiu Clinic', value: 'trialId' },
+        { text: 'Detalii', value: '' }
       ]
     }
   },

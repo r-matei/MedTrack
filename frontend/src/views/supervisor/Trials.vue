@@ -8,14 +8,14 @@
         dark
         align-center
         @click="addTrialTab = true">
-        Add trial
+        Adaugă studiu
       </v-btn>
     </div>
     <v-card-title>
       <v-text-field
         v-model="search"
         append-icon="mdi-magnify"
-        label="Search"
+        label="Caută"
         single-line
         hide-details
       ></v-text-field>
@@ -82,11 +82,11 @@
             right>
               <v-icon color="grey">mdi-close-circle-outline</v-icon>
             </v-btn>
-            <v-card-title class="pa-10 grey--text text-subtitle">Complete the trial details</v-card-title>
+            <v-card-title class="pa-10 grey--text text-subtitle">Completați detaliile studiului</v-card-title>
             <v-text-field
               class="mt-3 grey--text px-10"
               v-model="newTrial.title"
-              label="Trial title"
+              label="Titlul studiului"
               required
               light
               :rules="[required]">
@@ -95,7 +95,7 @@
               v-model="newTrial.phase"
               :items="trialPhases"
               menu-props="auto"
-              label="Phase"
+              label="Fază"
               class="mt-3 grey--text px-10"
               hide-details
               single-line
@@ -106,7 +106,7 @@
             <v-textarea
               class="mt-3 grey--text px-10"
               v-model="newTrial.description"
-              label="Description"
+              label="Descriere"
               required
               light
               :rules="[required]">
@@ -114,7 +114,7 @@
             <v-text-field
               class="mt-3 grey--text px-10"
               v-model="newTrial.adverseEffects"
-              label="Adverse effects"
+              label="Efecte adverse"
               required
               light
               :rules="[required]">
@@ -122,7 +122,7 @@
             <v-text-field
               class="mt-3 grey--text px-10"
               v-model="supervisorEmail"
-              label="Supervisor email"
+              label="Emailul supervizorului"
               required
               light
               :rules="[required]">
@@ -130,7 +130,7 @@
             <v-textarea
               class="mt-3 grey--text px-10"
               v-model="newTrial.requirements"
-              label="Requirements (please add # before each requirement)"
+              label="Cerințe (vă rugăm să adăugați # înainte de fiecare cerință)"
               required
               light
               :rules="[required]">
@@ -145,7 +145,7 @@
               class="mx-4 mb-4"
               @click="addTrial">
               <v-icon>mdi-plus</v-icon>
-              Add
+              Adaugă
             </v-btn>
         </v-card>
       </v-overlay>
@@ -166,11 +166,11 @@ export default {
       search: '',
       trials: [],
       headers: [
-        { text: 'Title', value: 'title' },
-        { text: 'Current Phase', value: 'phase' },
-        { text: 'Patients Number', value: 'patientsNr' },
+        { text: 'Titlu', value: 'title' },
+        { text: 'Fază', value: 'phase' },
+        { text: 'Număr pacienți', value: 'patientsNr' },
         { text: 'Status', value: 'status' },
-        { text: 'Details', value: '' }
+        { text: 'Detalii', value: '' }
       ],
       addTrialTab: false,
       newTrial: {
@@ -184,6 +184,7 @@ export default {
         requirements: ''
       },
       trialPhases: ['I', 'II', 'III', 'IV'],
+      required: (value) => !!value || 'Obligatoriu.',
       supervisorEmail: '',
       supervisors: []
     }
@@ -224,7 +225,7 @@ export default {
         }
       }
       this.newTrial.status = 'active'
-      this.newTrial.link = '/trials/' + this.trials.length
+      this.newTrial.link = '/supervizor/studii-supervizor/' + this.trials.length
       try {
         await TrialsService.post(this.newTrial)
         this.addTrialTab = false
